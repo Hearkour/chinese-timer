@@ -1,41 +1,45 @@
-/* 
-@font-face {
-    font-family: 'NanumSquareRoundB';
-    src: url('../Hearkour-app/fonts/eot/NanumSquareRoundB.eot');
-    src: local("NanumSquareRoundB"),
-    url('../Hearkour-app/fonts/otf/NanumSquareRoundB.otf') format('opentype'),
-    url('../Hearkour-app/fonts/ttf/NanumSquareRoundB.ttf') format('truetype'),
-    url('../Hearkour-app/fonts/eot/NanumSquareRoundB.eot?#iefix') format('embedded-opentype');
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'NanumSquareRoundEB';
-    src: url('../Hearkour-app/fonts/eot/NanumSquareRoundEB.eot');
-    src: local("NanumSquareRoundEB"),
-    url('../Hearkour-app/fonts/otf/NanumSquareRoundEB.otf') format('opentype'),
-    url('../Hearkour-app/fonts/ttf/NanumSquareRoundEB.ttf') format('truetype'),
-    url('../Hearkour-app/fonts/eot/NanumSquareRoundEB.eot?#iefix') format('embedded-opentype');
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'NanumSquareRoundL';
-    src: url('../Hearkour-app/fonts/eot/NanumSquareRoundL.eot');
-    src: local("NanumSquareRoundL"),
-    url('../Hearkour-app/fonts/otf/NanumSquareRoundL.otf') format('opentype'),
-    url('../Hearkour-app/fonts/ttf/NanumSquareRoundL.ttf') format('truetype'),
-    url('../Hearkour-app/fonts/eot/NanumSquareRoundL.eot?#iefix') format('embedded-opentype');
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'NanumSquareRoundR';
-    src: url('../Hearkour-app/fonts/eot/NanumSquareRoundR.eot');
-    src: local("NanumSquareRoundR"),
-    url('../Hearkour-app/fonts/otf/NanumSquareRoundR.otf') format('opentype'),
-    url('../Hearkour-app/fonts/ttf/NanumSquareRoundR.ttf') format('truetype'),
-    url('../Hearkour-app/fonts/eot/NanumSquareRoundR.eot?#iefix') format('embedded-opentype');
-    font-style: normal;
-    font-display: swap;
-} */
+/* 본고딕 Noto Sans CJK */
+
+@font-face { font-family: 'NotoSans-Black'; src: url('../fonts/NotoSans/SC/NotoSansSC-Black.otf'); }
+@font-face { font-family: 'NotoSans-Black'; src: url('../fonts/NotoSans/KR/NotoSansKR-Black.otf'); }
+
+@font-face { font-family: 'NotoSans-Bold'; src: url('../fonts/NotoSans/SC/NotoSansSC-Bold.otf'); }
+@font-face { font-family: 'NotoSans-Bold'; src: url('../fonts/NotoSans/KR/NotoSansKR-Bold.otf'); }
+
+@font-face { font-family: 'NotoSans-Medium'; src: url('../fonts/NotoSans/SC/NotoSansSC-Medium.otf'); }
+@font-face { font-family: 'NotoSans-Medium'; src: url('../fonts/NotoSans/KR/NotoSansKR-Medium.otf'); }
+
+@font-face { font-family: 'NotoSans-Regular'; src: url('../fonts/NotoSans/SC/NotoSansSC-Regular.otf'); }
+@font-face { font-family: 'NotoSans-Regular'; src: url('../fonts/NotoSans/KR/NotoSansKR-Regular.otf'); }
+
+@font-face { font-family: 'NotoSans-DemiLight'; src: url('../fonts/NotoSans/SC/NotoSansSC-DemiLight.otf'); }
+@font-face { font-family: 'NotoSans-DemiLight'; src: url('../fonts/NotoSans/KR/NotoSansKR-DemiLight.otf'); }
+
+@font-face { font-family: 'NotoSans-Light'; src: url('../fonts/NotoSans/SC/NotoSansSC-Light.otf'); }
+@font-face { font-family: 'NotoSans-Light'; src: url('../fonts/NotoSans/KR/NotoSansKR-Light.otf'); }
+
+@font-face { font-family: 'NotoSans-Thin'; src: url('../fonts/NotoSans/SC/NotoSansSC-Thin.otf'); }
+@font-face { font-family: 'NotoSans-Thin'; src: url('../fonts/NotoSans/KR/NotoSansKR-Thin.otf'); }
+
+/* 본명조 Noto Serif CJK */
+
+@font-face { font-family: 'NotoSerif-Black'; src: url('../fonts/NotoSerif/SC/NotoSerifSC-Black.otf'); }
+@font-face { font-family: 'NotoSerif-Black'; src: url('../fonts/NotoSerif/KR/NotoSerifKR-Black.otf'); }
+
+@font-face { font-family: 'NotoSerif-Bold'; src: url('../fonts/NotoSerif/SC/NotoSerifSC-Bold.otf'); }
+@font-face { font-family: 'NotoSerif-Bold'; src: url('../fonts/NotoSerif/KR/NotoSerifKR-Bold.otf'); }
+
+@font-face { font-family: 'NotoSerif-SemiBold'; src: url('../fonts/NotoSerif/SC/NotoSerifSC-SemiBold.otf'); }
+@font-face { font-family: 'NotoSerif-SemiBold'; src: url('../fonts/NotoSerif/KR/NotoSerifKR-SemiBold.otf'); }
+
+@font-face { font-family: 'NotoSerif-Medium'; src: url('../fonts/NotoSerif/SC/NotoSerifSC-Medium.otf'); }
+@font-face { font-family: 'NotoSerif-Medium'; src: url('../fonts/NotoSerif/KR/NotoSerifKR-Medium.otf'); }
+
+@font-face { font-family: 'NotoSerif-Regular'; src: url('../fonts/NotoSerif/SC/NotoSerifSC-Regular.otf'); }
+@font-face { font-family: 'NotoSerif-Regular'; src: url('../fonts/NotoSerif/KR/NotoSerifKR-Regular.otf'); }
+
+@font-face { font-family: 'NotoSerif-Light'; src: url('../fonts/NotoSerif/SC/NotoSerifSC-Light.otf'); }
+@font-face { font-family: 'NotoSerif-Light'; src: url('../fonts/NotoSerif/KR/NotoSerifKR-Light.otf'); }
+
+@font-face { font-family: 'NotoSerif-ExtraLight'; src: url('../fonts/NotoSerif/SC/NotoSerifSC-ExtraLight.otf'); }
+@font-face { font-family: 'NotoSerif-ExtraLight'; src: url('../fonts/NotoSerif/KR/NotoSerifKR-ExtraLight.otf'); }
