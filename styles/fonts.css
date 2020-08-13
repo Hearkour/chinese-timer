@@ -1,0 +1,41 @@
+/* 
+@font-face {
+    font-family: 'NanumSquareRoundB';
+    src: url('../Hearkour-app/fonts/eot/NanumSquareRoundB.eot');
+    src: local("NanumSquareRoundB"),
+    url('../Hearkour-app/fonts/otf/NanumSquareRoundB.otf') format('opentype'),
+    url('../Hearkour-app/fonts/ttf/NanumSquareRoundB.ttf') format('truetype'),
+    url('../Hearkour-app/fonts/eot/NanumSquareRoundB.eot?#iefix') format('embedded-opentype');
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'NanumSquareRoundEB';
+    src: url('../Hearkour-app/fonts/eot/NanumSquareRoundEB.eot');
+    src: local("NanumSquareRoundEB"),
+    url('../Hearkour-app/fonts/otf/NanumSquareRoundEB.otf') format('opentype'),
+    url('../Hearkour-app/fonts/ttf/NanumSquareRoundEB.ttf') format('truetype'),
+    url('../Hearkour-app/fonts/eot/NanumSquareRoundEB.eot?#iefix') format('embedded-opentype');
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'NanumSquareRoundL';
+    src: url('../Hearkour-app/fonts/eot/NanumSquareRoundL.eot');
+    src: local("NanumSquareRoundL"),
+    url('../Hearkour-app/fonts/otf/NanumSquareRoundL.otf') format('opentype'),
+    url('../Hearkour-app/fonts/ttf/NanumSquareRoundL.ttf') format('truetype'),
+    url('../Hearkour-app/fonts/eot/NanumSquareRoundL.eot?#iefix') format('embedded-opentype');
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'NanumSquareRoundR';
+    src: url('../Hearkour-app/fonts/eot/NanumSquareRoundR.eot');
+    src: local("NanumSquareRoundR"),
+    url('../Hearkour-app/fonts/otf/NanumSquareRoundR.otf') format('opentype'),
+    url('../Hearkour-app/fonts/ttf/NanumSquareRoundR.ttf') format('truetype'),
+    url('../Hearkour-app/fonts/eot/NanumSquareRoundR.eot?#iefix') format('embedded-opentype');
+    font-style: normal;
+    font-display: swap;
+} */

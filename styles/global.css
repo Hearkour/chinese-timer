@@ -1,0 +1,52 @@
+/* 본문 */
+
+body {
+    font-family: 'NotoSerif-Light';
+    font-size: 4rem;
+    /* color: #c6c6ff; */
+}
+
+body:before {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+
+    /* background: linear-gradient(#55507e, #20193b, #0c0e14) no-repeat center center; */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+div {
+    border: 2px dashed blueviolet;
+    font-size: 2.5vmax;
+}
+
+.print {
+    border: 1px solid gainsboro;
+    text-align: center;
+    /* height: 100%; */
+}
+.print.n { width: 5.6vmax; }
+.print.c { width: 8vmax; }
+
+.outer {
+    margin: auto;
+    position: relative;
+    top: 0; bottom: 0; left: 0; right: 0;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+.inner {
+    display: table-cell;
+    vertical-align: middle;
+    /*background-color:#272e46;*/
+}
