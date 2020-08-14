@@ -1,4 +1,4 @@
-/*** Chinese time print objects & functions from here ***/
+/*** Chinese time print objects & functions ***/
 
 const C = { // Chinese number conversion
 
