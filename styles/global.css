@@ -39,7 +39,7 @@ div {
     justify-content: center;
     
     text-align: center;
-    height: 18vh;
+    height: min(22vh, 10rem);
 }
 .inner {
     display: table-cell;

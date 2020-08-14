@@ -8,6 +8,7 @@ const $timer_chinese_pinyin = $('timer-chinese-pinyin');
 const TIMEOUT = 180; // seconds
 
 const bodyFontSize = '6vmax';
+const bodyFontMAX = '4rem';
 
 class FT { // Framerate Timer, statics for calc
     static stop = false;
@@ -17,7 +18,7 @@ class FT { // Framerate Timer, statics for calc
 
 $s('body').onload = (function() {
     $s('body').style.fontFamily = 'NotoSerif-Regular';
-    $s('body').style.fontSize = bodyFontSize;
+    $s('body').style.fontSize = `min(${bodyFontSize}, ${bodyFontMAX})`;
 });
 
 startAnimating(5);
