@@ -2,7 +2,7 @@
 
 body {
     font-family: 'NotoSerif-Light';
-    font-size: 4rem;
+    font-size: 2.5vmax;
     /* color: #c6c6ff; */
 }
 
@@ -22,17 +22,17 @@ body:before {
     background-size: cover;
 }
 div {
-    border: 2px dashed blueviolet;
-    font-size: 2.5vmax;
+    border: 1px dashed blueviolet;
 }
 
-.print {
+.casing {
     border: 1px solid gainsboro;
     text-align: center;
     /* height: 100%; */
 }
-.print.n { width: 5.6vmax; }
-.print.c { width: 8vmax; }
+
+.digits { width: 5.6vmax; }
+.chars  { width: 8vmax; }
 
 .outer {
     margin: auto;

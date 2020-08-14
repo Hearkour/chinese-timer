@@ -1,7 +1,10 @@
 function $(id) { return document.getElementById(id); }
 
 const $timer_digits = $('timer-digits');
-const $timer_chinese = $('timer-chinese');
+const $timer_chinese_chars = $('timer-chinese-chars');
+const $timer_chinese_pinyin = $('timer-chinese-pinyin');
+
+var heading;
 
 // const START = performance.now();
 const TIMEOUT = 180; // seconds
@@ -12,7 +15,7 @@ class FT { // Framerate Timer, statics for calc
     static fpsInterval; static startTime; static now; static then; static elapsed;
 }
 
-startAnimating(15);
+startAnimating(5);
 
 // initialize the drawing timer variables and start the animation
 function startAnimating(fps) {
@@ -20,14 +23,15 @@ function startAnimating(fps) {
     FT.then = performance.now();
     FT.startTime = FT.then;
 
-    drawInnerTime_digits();
-    drawInnerTime_chinese();
+    drawFrameInnerTime();
 }
 
 // the animation loop calculates time elapsed since the last loop
 // and only draws if your specified fps interval is achieved
-function drawInnerTime_digits() {
-    requestAnimationFrame(drawInnerTime_digits);
+function drawFrameInnerTime() {
+
+    // request next frame
+    requestAnimationFrame(drawFrameInnerTime);
     FT.now = performance.now();
     FT.elapsed = FT.now - FT.then;
 
@@ -37,100 +41,137 @@ function drawInnerTime_digits() {
         // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
         FT.then = FT.now - (FT.elapsed % FT.fpsInterval);
 
-        /*** Actual content here ***/
-        drawInnerTime('digits', $timer_digits);
+        /*** Actual content execution here ***/
+        setHeading('h1');
+        drawInnerTime($timer_digits, 'digits');
+        drawInnerTime($timer_chinese_chars, 'chinese', 'chars');
+        drawInnerTime($timer_chinese_pinyin, 'chinese', 'pinyin');
     }
 }
 
-function drawInnerTime_chinese() {
-    requestAnimationFrame(drawInnerTime_chinese);
+class C { // Chinese number conversion
 
-    if (FT.elapsed > FT.fpsInterval) {
-        FT.then = FT.now - (FT.elapsed % FT.fpsInterval);
-        drawInnerTime('chinese', $timer_chinese);
+    static c(number) { // as characters
+        let c = '';
+        switch (number) {
+            case 0: c = '零'; break;
+            case 1: c = '一'; break;
+            case 2: c = '二'; break;
+            case 3: c = '三'; break;
+            case 4: c = '四'; break;
+            case 5: c = '五'; break;
+            case 6: c = '六'; break;
+            case 7: c = '七'; break;
+            case 8: c = '八'; break;
+            case 9: c = '九'; break;
+            case 10: c = '十'; break;
+            default: break;
+        }
+        return c;
+    }
+
+    static p(number) { // as pinyin
+        let p = '';
+        switch (number) {
+            case 0: p = 'líng'; break;
+            case 1: p = 'yī'; break;
+            case 2: p = 'èr'; break;
+            case 3: p = 'sān'; break;
+            case 4: p = 'sì'; break;
+            case 5: p = 'wǔ'; break;
+            case 6: p = 'liù'; break;
+            case 7: p = 'qī'; break;
+            case 8: p = 'bā'; break;
+            case 9: p = 'jiǔ'; break;
+            case 10: p = 'shí'; break;
+            default: break;
+        }
+        return p;
     }
 }
 
-function drawInnerTime(type, $timer) {
+function setHeading(heading) {
+    window.heading = heading;
+}
+
+// Who knew JS didn't support function overloading?
+function drawInnerTime($timer, langType, charType) {
+
     const NOW = Math.floor(performance.now() / 1000);
     let remains = TIMEOUT - NOW;
 
     let min = Math.floor(remains / 60);
     let sec = Math.floor(remains % 60);
-    // $timer.innerHTML = '<h1>' + min + ' 分 ' + addSpace(sec) + sec + ' 秒</h1>';
-    $timer.innerHTML = setInnerTime(type, min, sec, 'h1');
+    setInnerTime($timer, langType, charType, min, sec, heading);
 }
 
-function C(number) {
-    let c = '';
-    switch (number) {
-        case 0: c = '零'; break;
-        case 1: c = '一'; break;
-        case 2: c = '二'; break;
-        case 3: c = '三'; break;
-        case 4: c = '四'; break;
-        case 5: c = '五'; break;
-        case 6: c = '六'; break;
-        case 7: c = '七'; break;
-        case 8: c = '八'; break;
-        case 9: c = '九'; break;
-        case 10: c = '十'; break;
-        default: break;
-    }
-    return c;
-}
-
-function setInnerTime(type, minutes, seconds, heading) {
+function setInnerTime($timer, langType, charType, minutes, seconds, heading) {
     
     let innerHTML;
+    let m3, m2, m1, s3, s2, s1;
 
-    let m2 = minutes<10 ? '' : Math.floor(minutes/10);
-    let s2 = seconds<10 ? '' : Math.floor(seconds/10);
-    let m1 = Math.floor(minutes % 10);
-    let s1 = Math.floor(seconds % 10);
+    setInnerTimeChar(langType);
+    setInnerTimeHTML(langType, charType);
+
+    $timer.innerHTML = innerHTML;
     
-    if (type == 'digits') {
+    function setInnerTimeChar(langType) {
+        
+        if (langType == 'digits') {
+            
+            m3 = s3 = '';
+            m2 = minutes < 10 ? '' : Math.floor(minutes / 10);
+            s2 = seconds < 10 ? '' : Math.floor(seconds / 10);
+            m1 = Math.floor(minutes % 10);
+            s1 = Math.floor(seconds % 10);
+        }
 
-        innerHTML = `
-            <div class="print n"> <!--m3--> </div>
-            <div class="print n"> <${heading}> ${m2} </${heading}> </div>
-            <div class="print n"> <${heading}> ${m1} </${heading}> </div>
-            <div class="print c"> <${heading}> 分 </${heading}> </div>
-            <div class="print n"> </div>
-            <div class="print n"> <!--s3--> </div>
-            <div class="print n"> <${heading}> ${s2} </${heading}> </div>
-            <div class="print n"> <${heading}> ${s1} </${heading}> </div>
-            <div class="print c"> <${heading}> 秒 </${heading}> </div>
-        `;
+        else if (langType == 'chinese') {
+
+            setInnerTimeChar('digits');
+
+            m3 = m2 > 1 ? m2 : '';
+            s3 = s2 > 1 ? s2 : '';
+            m2 = m2 > 0 ? 10 : '';
+            s2 = s2 > 0 ? 10 : '';
+            if (m2 > 0 && m1 == 0) m1 = '';
+            if (s2 > 0 && s1 == 0) s1 = '';
+        }
     }
 
-    else if (type == 'chinese') {
+    function setInnerTimeHTML(langType, charType) {
 
-        let m3 = m2>1 ? m2 : '';
-        let s3 = s2>1 ? s2 : '';
-        m2 = m2>0 ? 10 : '';
-        s2 = s2>0 ? 10 : '';
-        if (m2>0 && m1==0) m1 = '';
-        if (s2>0 && s1==0) s1 = '';
+        let minChar = '分', secChar = '秒';
 
+        if (langType == 'chinese') {
+
+            if (charType == 'chars') {
+                m3 = C.c(m3); m2 = C.c(m2); m1 = C.c(m1);
+                s3 = C.c(s3); s2 = C.c(s2); s1 = C.c(s1);
+            }
+
+            else if (charType == 'pinyin') {
+                m3 = C.p(m3); m2 = C.p(m2); m1 = C.p(m1);
+                s3 = C.p(s3); s2 = C.p(s2); s1 = C.p(s1);
+
+                minChar = 'fēn';
+                secChar = 'miǎo';
+                $timer.setAttribute('style', 'font-size: 1.5vmax;');
+            }
+        }
+        
         innerHTML = `
-            <div class="print n"> <${heading}> ${C(m3)} </${heading}> </div>
-            <div class="print n"> <${heading}> ${C(m2)} </${heading}> </div>
-            <div class="print n"> <${heading}> ${C(m1)} </${heading}> </div>
-            <div class="print c"> <${heading}> 分 </${heading}> </div>
-            <div class="print n"> </div>
-            <div class="print n"> <${heading}> ${C(s3)} </${heading}> </div>
-            <div class="print n"> <${heading}> ${C(s2)} </${heading}> </div>
-            <div class="print n"> <${heading}> ${C(s1)} </${heading}> </div>
-            <div class="print c"> <${heading}> 秒 </${heading}> </div>
+            <div class="outer">
+                <div class="casing digits"> <${heading}> ${m3} </${heading}> </div>
+                <div class="casing digits"> <${heading}> ${m2} </${heading}> </div>
+                <div class="casing digits"> <${heading}> ${m1} </${heading}> </div>
+                <div class="casing chars"> <${heading}> ${minChar} </${heading}> </div>
+                <div class="casing digits"> </div>
+                <div class="casing digits"> <${heading}> ${s3} </${heading}> </div>
+                <div class="casing digits"> <${heading}> ${s2} </${heading}> </div>
+                <div class="casing digits"> <${heading}> ${s1} </${heading}> </div>
+                <div class="casing chars"> <${heading}> ${secChar} </${heading}> </div>
+            </div>
         `;
     }
-
-    return innerHTML;
 }
-
-// function sett() {
-//     $('nowpf').innerHTML = Math.floor(performance.now()/1000);
-//     requestAnimationFrame(sett);
-// };
-// sett();
