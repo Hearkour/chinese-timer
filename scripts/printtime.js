@@ -1,19 +1,24 @@
-function $(id) { return document.getElementById(id); }
+function $(id)          { return document.getElementById(id); }
+function $s(selector)   { return document.querySelector(selector); }
 
 const $timer_digits = $('timer-digits');
 const $timer_chinese_chars = $('timer-chinese-chars');
 const $timer_chinese_pinyin = $('timer-chinese-pinyin');
 
-var heading;
-
-// const START = performance.now();
 const TIMEOUT = 180; // seconds
+
+const bodyFontSize = '6vmax';
 
 class FT { // Framerate Timer, statics for calc
     static stop = false;
     static frameCount = 0;
     static fpsInterval; static startTime; static now; static then; static elapsed;
 }
+
+$s('body').onload = (function() {
+    $s('body').style.fontFamily = 'NotoSerif-Regular';
+    $s('body').style.fontSize = bodyFontSize;
+});
 
 startAnimating(5);
 
@@ -42,16 +47,17 @@ function drawFrameInnerTime() {
         FT.then = FT.now - (FT.elapsed % FT.fpsInterval);
 
         /*** Actual content execution here ***/
-        setHeading('h1');
         drawInnerTime($timer_digits, 'digits');
         drawInnerTime($timer_chinese_chars, 'chinese', 'chars');
         drawInnerTime($timer_chinese_pinyin, 'chinese', 'pinyin');
     }
 }
 
-class C { // Chinese number conversion
+/*** Chinese time print objects & functions from here ***/
 
-    static c(number) { // as characters
+const C = { // Chinese number conversion
+
+    c: function(number) { // as characters
         let c = '';
         switch (number) {
             case 0: c = '零'; break;
@@ -68,9 +74,9 @@ class C { // Chinese number conversion
             default: break;
         }
         return c;
-    }
+    },
 
-    static p(number) { // as pinyin
+    p: function (number) { // as pinyin
         let p = '';
         switch (number) {
             case 0: p = 'líng'; break;
@@ -90,88 +96,95 @@ class C { // Chinese number conversion
     }
 }
 
-function setHeading(heading) {
-    window.heading = heading;
+const PTN = { // print time numbers
+
+    m3:0, m2:0, m1:0,
+    s3:0, s2:0, s1:0,
+
+    convertTo: (charType) => {
+        
+        if (charType == 'chars') {
+            PTN.m3 = C.c(PTN.m3); PTN.m2 = C.c(PTN.m2); PTN.m1 = C.c(PTN.m1);
+            PTN.s3 = C.c(PTN.s3); PTN.s2 = C.c(PTN.s2); PTN.s1 = C.c(PTN.s1);
+        }
+
+        else if (charType == 'pinyin') {
+            PTN.m3 = C.p(PTN.m3); PTN.m2 = C.p(PTN.m2); PTN.m1 = C.p(PTN.m1);
+            PTN.s3 = C.p(PTN.s3); PTN.s2 = C.p(PTN.s2); PTN.s1 = C.p(PTN.s1);
+        }
+    }
 }
 
-// Who knew JS didn't support function overloading?
 function drawInnerTime($timer, langType, charType) {
 
     const NOW = Math.floor(performance.now() / 1000);
-    let remains = TIMEOUT - NOW;
+    const REMAINS = TIMEOUT - NOW;
 
-    let min = Math.floor(remains / 60);
-    let sec = Math.floor(remains % 60);
-    setInnerTime($timer, langType, charType, min, sec, heading);
+    let min = Math.floor(REMAINS / 60);
+    let sec = Math.floor(REMAINS % 60);
+    setInnerTime($timer, langType, charType, min, sec);
 }
 
-function setInnerTime($timer, langType, charType, minutes, seconds, heading) {
-    
-    let innerHTML;
-    let m3, m2, m1, s3, s2, s1;
+function setInnerTime($timer, langType, charType, min, sec) {
 
-    setInnerTimeChar(langType);
-    setInnerTimeHTML(langType, charType);
+    setInnerTimeChar(langType, min, sec);
+    setInnerTimeHTML($timer, langType, charType);
+}
 
-    $timer.innerHTML = innerHTML;
+function setInnerTimeChar(langType, min, sec) {
     
-    function setInnerTimeChar(langType) {
+    if (langType == 'digits') {
         
-        if (langType == 'digits') {
-            
-            m3 = s3 = '';
-            m2 = minutes < 10 ? '' : Math.floor(minutes / 10);
-            s2 = seconds < 10 ? '' : Math.floor(seconds / 10);
-            m1 = Math.floor(minutes % 10);
-            s1 = Math.floor(seconds % 10);
-        }
+        PTN.m3 = PTN.s3 = '';
+        PTN.m2 = min < 10 ? '' : Math.floor(min / 10);
+        PTN.s2 = sec < 10 ? '' : Math.floor(sec / 10);
+        PTN.m1 = Math.floor(min % 10);
+        PTN.s1 = Math.floor(sec % 10);
+    }
 
-        else if (langType == 'chinese') {
+    else if (langType == 'chinese') {
 
-            setInnerTimeChar('digits');
+        setInnerTimeChar('digits', min, sec);
 
-            m3 = m2 > 1 ? m2 : '';
-            s3 = s2 > 1 ? s2 : '';
-            m2 = m2 > 0 ? 10 : '';
-            s2 = s2 > 0 ? 10 : '';
-            if (m2 > 0 && m1 == 0) m1 = '';
-            if (s2 > 0 && s1 == 0) s1 = '';
+        PTN.m3 = PTN.m2 > 1 ? PTN.m2 : '';
+        PTN.s3 = PTN.s2 > 1 ? PTN.s2 : '';
+        PTN.m2 = PTN.m2 > 0 ? 10 : '';
+        PTN.s2 = PTN.s2 > 0 ? 10 : '';
+        if (PTN.m2 > 0 && PTN.m1 == 0) PTN.m1 = '';
+        if (PTN.s2 > 0 && PTN.s1 == 0) PTN.s1 = '';
+    }
+}
+
+function setInnerTimeHTML($timer, langType, charType) {
+
+    let minChar = '分', secChar = '秒';
+
+    if (langType == 'chinese') {
+
+        if (charType == 'chars')
+            PTN.convertTo('chars');
+
+        else if (charType == 'pinyin') {
+            PTN.convertTo('pinyin');
+
+            minChar = 'fēn';
+            secChar = 'miǎo';
+            let pfontSize = bodyFontSize.slice(0, -4) / 2;
+            $timer.style.fontSize = `${pfontSize}vmax`;
         }
     }
 
-    function setInnerTimeHTML(langType, charType) {
-
-        let minChar = '分', secChar = '秒';
-
-        if (langType == 'chinese') {
-
-            if (charType == 'chars') {
-                m3 = C.c(m3); m2 = C.c(m2); m1 = C.c(m1);
-                s3 = C.c(s3); s2 = C.c(s2); s1 = C.c(s1);
-            }
-
-            else if (charType == 'pinyin') {
-                m3 = C.p(m3); m2 = C.p(m2); m1 = C.p(m1);
-                s3 = C.p(s3); s2 = C.p(s2); s1 = C.p(s1);
-
-                minChar = 'fēn';
-                secChar = 'miǎo';
-                $timer.setAttribute('style', 'font-size: 1.5vmax;');
-            }
-        }
-        
-        innerHTML = `
-            <div class="outer">
-                <div class="casing digits"> <${heading}> ${m3} </${heading}> </div>
-                <div class="casing digits"> <${heading}> ${m2} </${heading}> </div>
-                <div class="casing digits"> <${heading}> ${m1} </${heading}> </div>
-                <div class="casing chars"> <${heading}> ${minChar} </${heading}> </div>
-                <div class="casing digits"> </div>
-                <div class="casing digits"> <${heading}> ${s3} </${heading}> </div>
-                <div class="casing digits"> <${heading}> ${s2} </${heading}> </div>
-                <div class="casing digits"> <${heading}> ${s1} </${heading}> </div>
-                <div class="casing chars"> <${heading}> ${secChar} </${heading}> </div>
-            </div>
-        `;
-    }
+    $timer.innerHTML = `
+        <div class="outer">
+            <div class="casing digits"> ${PTN.m3} </div>
+            <div class="casing digits"> ${PTN.m2} </div>
+            <div class="casing digits"> ${PTN.m1} </div>
+            <div class="casing chars">  ${minChar}  </div>
+            <div class="casing digits"> </div>
+            <div class="casing digits"> ${PTN.s3} </div>
+            <div class="casing digits"> ${PTN.s2} </div>
+            <div class="casing digits"> ${PTN.s1} </div>
+            <div class="casing chars">  ${secChar}  </div>
+        </div>
+    `;
 }

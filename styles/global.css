@@ -1,11 +1,5 @@
 /* 본문 */
 
-body {
-    font-family: 'NotoSerif-Light';
-    font-size: 2.5vmax;
-    /* color: #c6c6ff; */
-}
-
 body:before {
     display: block;
     position: fixed;
@@ -21,6 +15,7 @@ body:before {
     -o-background-size: cover;
     background-size: cover;
 }
+
 div {
     border: 1px dashed blueviolet;
 }
@@ -42,11 +37,25 @@ div {
     display: flex;
     align-items: center;
     justify-content: center;
-
+    
     text-align: center;
+    height: 18vh;
 }
 .inner {
     display: table-cell;
     vertical-align: middle;
     /*background-color:#272e46;*/
 }
+
+input[type=button] {
+    border: none;
+    width: 10vmax;
+    height: 5vmax;
+    background: coral;
+    font: 2vmax 'NotoSerif-Light';
+    color: white;
+}
+
+input[type=button]:hover    { background-color: salmon; }
+input[type=button]:active   { background: lightcoral; }
+input[type=button]:focus    { outline: none; }
