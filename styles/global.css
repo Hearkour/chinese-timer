@@ -1,4 +1,9 @@
-/* 본문 */
+/* :root variables are created in initialize.js */
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+}
 
 body:before {
     display: block;
@@ -11,51 +16,50 @@ body:before {
 
     /* background: linear-gradient(#55507e, #20193b, #0c0e14) no-repeat center center; */
     -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
 }
-
-div {
-    border: 1px dashed blueviolet;
-}
-
-.casing {
-    border: 1px solid gainsboro;
-    text-align: center;
-    /* height: 100%; */
-}
-
-.digits { width: 5.6vmax; }
-.chars  { width: 8vmax; }
 
 .outer {
     margin: auto;
     position: relative;
     top: 0; bottom: 0; left: 0; right: 0;
     
+    height: min(22vh, calc(var(--case-width) * 1.0));
+    margin: calc(var(--case-width) / 2) 0;
     display: flex;
-    align-items: center;
+
     justify-content: center;
-    
     text-align: center;
-    height: min(22vh, 10rem);
-}
-.inner {
-    display: table-cell;
-    vertical-align: middle;
-    /*background-color:#272e46;*/
+    align-items: center;
 }
 
-input[type=button] {
+div {
+    border: var(--border-width) rgba(140, 0, 0, var(--border-opacity)) var(--div-border);
+
+    /* for border transparency compatibility(...) */
+    -webkit-background-clip: border padding content;     /* Safari 4? Chrome 6? */
+    background-clip: border-box padding-box content-box; /* Firefox 4, Safari 5, Opera 10, IE 9 */
+}
+
+.case {
+    border: var(--border-width) rgb(140, 0, 0, var(--border-opacity)) var(--case-border);
+    width: var(--case-width);
+}
+
+button {
     border: none;
-    width: 10vmax;
-    height: 5vmax;
+    width: calc(var(--font-size) * 3.4);
+    height: calc(var(--font-size) * 1.1);
+
+    font: calc(var(--font-size) / 2.2) var(--font-family);
     background: coral;
-    font: 2vmax 'NotoSerif-Light';
     color: white;
+
+    vertical-align: middle;
+    text-align: center;
+    align-items: center;
 }
 
-input[type=button]:hover    { background-color: salmon; }
-input[type=button]:active   { background: lightcoral; }
-input[type=button]:focus    { outline: none; }
+button:hover    { background-color: salmon; }
+button:active   { background: lightcoral; }
+button:focus    { outline: none; }

@@ -41,7 +41,7 @@ const C = { // Chinese number conversion
     }
 }
 
-const PTN = { // print time numbers
+const TN = { // time numbers
 
     m3:0, m2:0, m1:0,
     s3:0, s2:0, s1:0,
@@ -49,13 +49,13 @@ const PTN = { // print time numbers
     convertTo: (charType) => {
         
         if (charType == 'chars') {
-            PTN.m3 = C.c(PTN.m3); PTN.m2 = C.c(PTN.m2); PTN.m1 = C.c(PTN.m1);
-            PTN.s3 = C.c(PTN.s3); PTN.s2 = C.c(PTN.s2); PTN.s1 = C.c(PTN.s1);
+            TN.m3 = C.c(TN.m3); TN.m2 = C.c(TN.m2); TN.m1 = C.c(TN.m1);
+            TN.s3 = C.c(TN.s3); TN.s2 = C.c(TN.s2); TN.s1 = C.c(TN.s1);
         }
 
         else if (charType == 'pinyin') {
-            PTN.m3 = C.p(PTN.m3); PTN.m2 = C.p(PTN.m2); PTN.m1 = C.p(PTN.m1);
-            PTN.s3 = C.p(PTN.s3); PTN.s2 = C.p(PTN.s2); PTN.s1 = C.p(PTN.s1);
+            TN.m3 = C.p(TN.m3); TN.m2 = C.p(TN.m2); TN.m1 = C.p(TN.m1);
+            TN.s3 = C.p(TN.s3); TN.s2 = C.p(TN.s2); TN.s1 = C.p(TN.s1);
         }
     }
 }
@@ -80,37 +80,45 @@ function setInnerTimeChar(langType, min, sec) {
     
     if (langType == 'digits') {
         
-        PTN.m3 = PTN.s3 = '';
-        PTN.m2 = min < 10 ? '' : Math.floor(min / 10);
-        PTN.s2 = sec < 10 ? '' : Math.floor(sec / 10);
-        PTN.m1 = Math.floor(min % 10);
-        PTN.s1 = Math.floor(sec % 10);
+        TN.m3 = TN.s3 = '';
+        TN.m2 = min < 10 ? '' : Math.floor(min / 10);
+        TN.s2 = sec < 10 ? '' : Math.floor(sec / 10);
+        TN.m1 = Math.floor(min % 10);
+        TN.s1 = Math.floor(sec % 10);
     }
 
     else if (langType == 'chinese') {
 
         setInnerTimeChar('digits', min, sec);
 
-        PTN.m3 = PTN.m2 > 1 ? PTN.m2 : '';
-        PTN.s3 = PTN.s2 > 1 ? PTN.s2 : '';
-        PTN.m2 = PTN.m2 > 0 ? 10 : '';
-        PTN.s2 = PTN.s2 > 0 ? 10 : '';
-        if (PTN.m2 > 0 && PTN.m1 == 0) PTN.m1 = '';
-        if (PTN.s2 > 0 && PTN.s1 == 0) PTN.s1 = '';
+        TN.m3 = TN.m2 > 1 ? TN.m2 : '';
+        TN.s3 = TN.s2 > 1 ? TN.s2 : '';
+        TN.m2 = TN.m2 > 0 ? 10 : '';
+        TN.s2 = TN.s2 > 0 ? 10 : '';
+        if (TN.m2 > 0 && TN.m1 == 0) TN.m1 = '';
+        if (TN.s2 > 0 && TN.s1 == 0) TN.s1 = '';
     }
 }
 
 function setInnerTimeHTML($timer, langType, charType) {
 
-    let minChar = '分', secChar = '秒';
+    let minChar, secChar;
 
-    if (langType == 'chinese') {
+    if (langType == 'digits') {
+        minChar = '분';
+        secChar = '초';
+    }
 
-        if (charType == 'chars')
-            PTN.convertTo('chars');
+    else if (langType == 'chinese') {
+        if (charType == 'chars') {
+            TN.convertTo('chars');
+
+            minChar = '分';
+            secChar = '秒';
+        }
 
         else if (charType == 'pinyin') {
-            PTN.convertTo('pinyin');
+            TN.convertTo('pinyin');
 
             minChar = 'fēn';
             secChar = 'miǎo';
@@ -120,15 +128,15 @@ function setInnerTimeHTML($timer, langType, charType) {
 
     $timer.innerHTML = `
         <div class="outer">
-            <div class="casing digits"> ${PTN.m3} </div>
-            <div class="casing digits"> ${PTN.m2} </div>
-            <div class="casing digits"> ${PTN.m1} </div>
-            <div class="casing chars">  ${minChar}  </div>
-            <div class="casing digits"> </div>
-            <div class="casing digits"> ${PTN.s3} </div>
-            <div class="casing digits"> ${PTN.s2} </div>
-            <div class="casing digits"> ${PTN.s1} </div>
-            <div class="casing chars">  ${secChar}  </div>
+            <div class="outer case"> ${TN.m3} </div>
+            <div class="outer case"> ${TN.m2} </div>
+            <div class="outer case"> ${TN.m1} </div>
+            <div class="outer case">  ${minChar}  </div>
+            <div class="outer case"> </div>
+            <div class="outer case"> ${TN.s3} </div>
+            <div class="outer case"> ${TN.s2} </div>
+            <div class="outer case"> ${TN.s1} </div>
+            <div class="outer case">  ${secChar}  </div>
         </div>
     `;
 }
