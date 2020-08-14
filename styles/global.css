@@ -2,7 +2,7 @@
 
 body {
     font-family: var(--font-family);
-    font-size: var(--font-size);
+    font-size: min(var(--font-size), calc(100vw / 14), 10vh);
 }
 
 body:before {
@@ -24,8 +24,8 @@ body:before {
     position: relative;
     top: 0; bottom: 0; left: 0; right: 0;
     
-    height: min(22vh, calc(var(--case-width) * 1.0));
-    margin: calc(var(--case-width) / 2) 0;
+    height: var(--case-width);
+    margin: min(calc(var(--case-width) / 2), 5vh) 0;
     display: flex;
 
     justify-content: center;
@@ -43,16 +43,17 @@ div {
 
 .case {
     border: var(--border-width) rgb(140, 0, 0, var(--border-opacity)) var(--case-border);
-    width: var(--case-width);
+    width: min(var(--case-width), calc(100vw / 11));
 }
 
 button {
     border: none;
-    width: calc(var(--font-size) * 3.4);
-    height: calc(var(--font-size) * 1.1);
+    padding: 0 min(calc(var(--font-size) / 2.2), 10vh);
+    /* width: min(calc(var(--font-size) * 3.4), 0); */
+    height: min(var(--font-size), var(--case-width));
 
-    font: calc(var(--font-size) / 2.2) var(--font-family);
-    background: coral;
+    font: min(calc(var(--font-size) / 2.2), calc(100vw / 14), 10vh) var(--font-family);
+    background: lightcoral;
     color: white;
 
     vertical-align: middle;

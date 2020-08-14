@@ -15,12 +15,12 @@ const $timer_chinese_pinyin = $('timer-chinese-pinyin');
 const TIMEOUT = 59 * 60 + 60; // seconds
 
 // Root var values
-const fontFamily = 'NotoSerif-Regular';
 const fontSize = '6vmax';
 const fontSizeMAX = '4rem';
+const fontFamily = 'NotoSerif-Regular';
 
 const case_ratio = 1.5;
-const case_border = 'dashed';
+const case_border = 'dotted';
 const div_border = 'solid';
 
 const border_opacity = 1;
@@ -28,7 +28,9 @@ const border_width = '2px';
 const button_width = '16vmax';
 const bbtn_content = [ '윤곽선 없애기', '윤곽선 표시' ];
 
+// Init once
 window.addEventListener('load', function() {
+    
     setRootStyle('--font-family', fontFamily);
     setRootStyle('--font-size', `min(${fontSize}, ${fontSizeMAX})`);
     

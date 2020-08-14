@@ -3,7 +3,6 @@
 const $border = $('border');
 
 const sp = { // switching (root) properties
-    divb: [ div_border, 'none' ],
     opab: [ border_opacity, 0 ],
     bbtn: bbtn_content, // border btn
     i: 0,
@@ -15,7 +14,6 @@ $border.innerHTML = sp.bbtn[0];
 $border.addEventListener('click', function() {
     let i = sp.switch();
 
-    setRootStyle('--div-border', sp.divb[i]);
     setRootStyle('--border-opacity', sp.opab[i]);
     $border.innerHTML = sp.bbtn[i];
 });

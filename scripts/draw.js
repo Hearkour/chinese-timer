@@ -12,7 +12,9 @@ function startAnimating(fps) {
     FT.then = performance.now();
     FT.startTime = FT.then;
 
+    console.log(`${getComputedStyle(document.body).fontSize.slice(0, -2) * case_ratio}px`);
     drawFrameInnerTime();
+    drawCaseSize();
 }
 
 // the animation loop calculates time elapsed since the last loop
@@ -35,6 +37,11 @@ function drawFrameInnerTime() {
         drawInnerTime($timer_chinese_chars, 'chinese', 'chars');
         drawInnerTime($timer_chinese_pinyin, 'chinese', 'pinyin');
     }
+}
+
+function drawCaseSize() {
+    requestAnimationFrame(drawCaseSize);
+    setRootStyle('--case-width', `${getComputedStyle(document.body).fontSize.slice(0, -2) * case_ratio}px`);
 }
 
 // ANIMATE.
