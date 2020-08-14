@@ -114,7 +114,7 @@ function setInnerTimeHTML($timer, langType, charType) {
 
             minChar = 'fēn';
             secChar = 'miǎo';
-            $timer.style.fontSize = `${ getComputedStyle($s('body')).fontSize.slice(0, -2) / 2 }px`;
+            $timer.style.fontSize = `${ getComputedStyle(document.body).fontSize.slice(0, -2) / 2 }px`;
         }
     }
 

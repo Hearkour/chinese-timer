@@ -12,7 +12,7 @@ const TIMEOUT = 180; // seconds
 const bodyFontSize = '6vmax';
 const bodyFontMAX = '4rem';
 
-$s('body').onload = (function() {
-    $s('body').style.fontFamily = 'NotoSerif-Regular';
-    $s('body').style.fontSize = `min(${bodyFontSize}, ${bodyFontMAX})`;
+window.addEventListener('load', function() {
+    document.body.style.fontFamily = 'NotoSerif-Regular';
+    document.body.style.fontSize = `min(${bodyFontSize}, ${bodyFontMAX})`;
 });
