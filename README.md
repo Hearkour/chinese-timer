@@ -7,7 +7,7 @@
 ## To-do:
 
 <details>
-  <summary>선택지 만들기:</summary>
+  <summary>선택지 만들기: (?)</summary>
   <br>
   
   - 제한시간설정
@@ -16,5 +16,5 @@
   - 움직이는 배경? 배경색상투명도?
   - fps?
 
-  > (?)
+  > (??)
 </details>
