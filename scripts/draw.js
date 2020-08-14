@@ -36,3 +36,6 @@ function drawFrameInnerTime() {
         drawInnerTime($timer_chinese_pinyin, 'chinese', 'pinyin');
     }
 }
+
+// ANIMATE.
+startAnimating(5);

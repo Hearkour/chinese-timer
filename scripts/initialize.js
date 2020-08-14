@@ -1,3 +1,5 @@
+/*** Initialize everything & first-load globals here ***/
+
 function $(id)          { return document.getElementById(id); }
 function $s(selector)   { return document.querySelector(selector); }
 
@@ -14,5 +16,3 @@ $s('body').onload = (function() {
     $s('body').style.fontFamily = 'NotoSerif-Regular';
     $s('body').style.fontSize = `min(${bodyFontSize}, ${bodyFontMAX})`;
 });
-
-startAnimating(5);
