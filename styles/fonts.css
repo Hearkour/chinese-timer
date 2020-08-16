@@ -43,3 +43,11 @@
 
 @font-face { font-family: 'NotoSerif-ExtraLight'; src: url('../fonts/NotoSerif/SC/NotoSerifSC-ExtraLight.otf'); }
 @font-face { font-family: 'NotoSerif-ExtraLight'; src: url('../fonts/NotoSerif/KR/NotoSerifKR-ExtraLight.otf'); }
+
+/* Other */
+
+@font-face { font-family: '배달의민족 연성'; src: url('../fonts/other/BMYEONSUNG.otf') format('opentype'), url('../fonts/other/BMYEONSUNG.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'KaiTi'; src: url('../fonts/other/KaiTi.ttf'); }
+@font-face { font-family: 'WanAnTi'; src: url('../fonts/other/wananti.ttf'); }
+@font-face { font-family: 'SCDream3'; src: url('../fonts/other/SCDream3.otf'); }
+@font-face { font-family: 'SCDream5'; src: url('../fonts/other/SCDream5.otf'); }

@@ -2,43 +2,57 @@
 
 function $(id)          { return document.getElementById(id); }
 function $s(selector)   { return document.querySelector(selector); }
+function $c(className)  { return document.getElementsByClassName(className)[0]; }
 
 function setRootStyle(property, value, priority) { root.style.setProperty(property, value, priority); }
 function getRootStyle(property) { return root.style.getPropertyValue(property); }
+function getBodyFontSize() { return getComputedStyle(document.body).fontSize.slice(0, -2); }
 
 const root = document.documentElement;
+
+const $title = $('title');
 
 const $timer_digits = $('timer-digits');
 const $timer_chinese_chars = $('timer-chinese-chars');
 const $timer_chinese_pinyin = $('timer-chinese-pinyin');
 
-const TIMEOUT = 59 * 60 + 60; // seconds
+const TIMEOUT = 59 * 60 + 60; // as seconds
+
+const timer_HTML_gbase = 'class="outer case" style="width: var(--case-size);';
+const baseColor = '140, 120, 210'; // 'R, G, B'
+
+const txtBrightness = '40%';
+function txtSpanDarken(innerHTML) { return `<span style="filter: brightness(${txtBrightness});">${innerHTML}</span>` }
 
 // Root var values
-const fontSize = '6vmax';
-const fontSizeMAX = '4rem';
-const fontFamily = 'NotoSerif-Regular';
+const fontSizeBase = '6vmax';
+var fontSizeMax /* draw.js */;
+const fontFamily = '배달의민족 연성';
 
-const case_ratio = 1.5;
-const case_border = 'dotted';
-const div_border = 'solid';
+const case_font_ratio = 1.5;
+const case_size_max = '9vw';
 
-const border_opacity = 1;
-const border_width = '2px';
-const button_width = '16vmax';
-const bbtn_content = [ '윤곽선 없애기', '윤곽선 표시' ];
+const case_border_style = 'solid';
+const border_style = 'solid';
+
+const border_alpha = 1;
+
+var border_thickness = '6px';
 
 // Init once
 window.addEventListener('load', function() {
     
     setRootStyle('--font-family', fontFamily);
-    setRootStyle('--font-size', `min(${fontSize}, ${fontSizeMAX})`);
+    setRootStyle('--font-size', `min(${fontSizeBase}, ${fontSizeMax})`);
+    $title.innerHTML = txtSpanDarken($title.innerHTML);
     
-    setRootStyle('--case-width', `${getComputedStyle(document.body).fontSize.slice(0, -2) * case_ratio}px`);
-    setRootStyle('--case-border', case_border);
-    setRootStyle('--div-border', div_border);
+    setRootStyle('--case-size-fixed', `${getBodyFontSize() * case_font_ratio}px`);
+    setRootStyle('--case-size', `min(${getBodyFontSize() * case_font_ratio}px, ${case_size_max})`);
+    setRootStyle('--case-border-style', case_border_style);
+    setRootStyle('--border-style', border_style);
 
-    setRootStyle('--border-opacity', border_opacity);
-    setRootStyle('--border-width', border_width);
-    setRootStyle('--button-width', button_width);
+    setRootStyle('--base-color', `rgb(${baseColor})`);
+    setRootStyle('--border-alpha', `rgba(${baseColor}, ${border_alpha})`);
+
+    setRootStyle('--border-thickness', border_thickness);
 });

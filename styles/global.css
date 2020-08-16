@@ -3,6 +3,8 @@
 body {
     font-family: var(--font-family);
     font-size: min(var(--font-size), calc(100vw / 14), 10vh);
+
+    color: var(--base-color);
 }
 
 body:before {
@@ -19,13 +21,22 @@ body:before {
     background-size: cover;
 }
 
+div {
+    border: calc(var(--border-thickness) * 2) var(--border-alpha);
+    border-style: var(--border-style) none;
+
+    /* for border transparency compatibility(...) */
+    -webkit-background-clip: border padding content;     /* Safari 4? Chrome 6? */
+    background-clip: border-box padding-box content-box; /* Firefox 4, Safari 5, Opera 10, IE 9 */
+}
+
 .outer {
-    margin: auto;
     position: relative;
     top: 0; bottom: 0; left: 0; right: 0;
     
-    height: var(--case-width);
-    margin: min(calc(var(--case-width) / 2), 5vh) 0;
+    /* width: var(--case-size); */
+    height: var(--case-size);
+    margin: min(calc(var(--case-size) / 4), 5vh) 0;
     display: flex;
 
     justify-content: center;
@@ -33,34 +44,33 @@ body:before {
     align-items: center;
 }
 
-div {
-    border: var(--border-width) rgba(140, 0, 0, var(--border-opacity)) var(--div-border);
-
-    /* for border transparency compatibility(...) */
-    -webkit-background-clip: border padding content;     /* Safari 4? Chrome 6? */
-    background-clip: border-box padding-box content-box; /* Firefox 4, Safari 5, Opera 10, IE 9 */
-}
-
 .case {
-    border: var(--border-width) rgb(140, 0, 0, var(--border-opacity)) var(--case-border);
-    width: min(var(--case-width), calc(100vw / 11));
+    border: var(--border-thickness) var(--border-alpha) var(--case-border-style);
+    width: var(--case-size);
+    height: var(--case-size);
 }
 
 button {
     border: none;
-    padding: 0 min(calc(var(--font-size) / 2.2), 10vh);
-    /* width: min(calc(var(--font-size) * 3.4), 0); */
-    height: min(var(--font-size), var(--case-width));
+    padding: 0;
 
-    font: min(calc(var(--font-size) / 2.2), calc(100vw / 14), 10vh) var(--font-family);
-    background: lightcoral;
-    color: white;
-
-    vertical-align: middle;
-    text-align: center;
-    align-items: center;
+    width: var(--case-size);
+    height: var(--case-size);
+    
+    stroke: var(--base-color);
+    fill: var(--base-color);
+    
+    filter: brightness(75%);
+    cursor: pointer;
+    background: none;
 }
 
-button:hover    { background-color: salmon; }
-button:active   { background: lightcoral; }
+button:hover    { filter: brightness(110%); }
+button:active   { filter: brightness(140%); }
 button:focus    { outline: none; }
+
+#title {
+    border-style: var(--case-border-style);
+    width: calc(( var(--case-size) + var(--border-thickness) * 2 ) * 5);
+    /* width: calc(( min(var(--case-size-fixed), 9vw) + var(--border-width) * 2 ) * 5); */
+}

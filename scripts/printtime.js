@@ -103,10 +103,12 @@ function setInnerTimeChar(langType, min, sec) {
 function setInnerTimeHTML($timer, langType, charType) {
 
     let minChar, secChar;
-
+    let digitsFont;
+    
     if (langType == 'digits') {
         minChar = '분';
         secChar = '초';
+        digitsFont = 'font-family: KaiTi';
     }
 
     else if (langType == 'chinese') {
@@ -115,6 +117,7 @@ function setInnerTimeHTML($timer, langType, charType) {
 
             minChar = '分';
             secChar = '秒';
+            $timer.style.fontFamily = 'KaiTi';
         }
 
         else if (charType == 'pinyin') {
@@ -122,21 +125,22 @@ function setInnerTimeHTML($timer, langType, charType) {
 
             minChar = 'fēn';
             secChar = 'miǎo';
+            $timer.style.fontFamily = 'NotoSerif-Medium';
             $timer.style.fontSize = `${ getComputedStyle(document.body).fontSize.slice(0, -2) / 2 }px`;
         }
     }
 
     $timer.innerHTML = `
         <div class="outer">
-            <div class="outer case"> ${TN.m3} </div>
-            <div class="outer case"> ${TN.m2} </div>
-            <div class="outer case"> ${TN.m1} </div>
-            <div class="outer case">  ${minChar}  </div>
-            <div class="outer case"> </div>
-            <div class="outer case"> ${TN.s3} </div>
-            <div class="outer case"> ${TN.s2} </div>
-            <div class="outer case"> ${TN.s1} </div>
-            <div class="outer case">  ${secChar}  </div>
+            <div ${timer_HTML_gbase} border-right: none; ${digitsFont};"> ${txtSpanDarken(TN.m3)}     </div>
+            <div ${timer_HTML_gbase} border-right: none; ${digitsFont};"> ${txtSpanDarken(TN.m2)}     </div>
+            <div ${timer_HTML_gbase} border-right: none; ${digitsFont};"> ${txtSpanDarken(TN.m1)}     </div>
+            <div ${timer_HTML_gbase} border-right: none;">                ${txtSpanDarken(minChar)}   </div>
+            <div ${timer_HTML_gbase} border-right: none;">                                          </div>
+            <div ${timer_HTML_gbase} border-right: none; ${digitsFont};"> ${txtSpanDarken(TN.s3)}     </div>
+            <div ${timer_HTML_gbase} border-right: none; ${digitsFont};"> ${txtSpanDarken(TN.s2)}     </div>
+            <div ${timer_HTML_gbase} border-right: none; ${digitsFont};"> ${txtSpanDarken(TN.s1)}     </div>
+            <div ${timer_HTML_gbase}">                                    ${txtSpanDarken(secChar)}   </div>
         </div>
     `;
 }
