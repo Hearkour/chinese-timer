@@ -1,6 +1,6 @@
 /*** Buttons! ***/
 
-const $btn_borderVisb = $('border');
+const $btn_borderVisb = $('btn-borderVisb');
 
 const SP = { // switching (+root) properties
     borderAlpha: [ border_alpha, 0 ],
