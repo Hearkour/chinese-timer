@@ -115,7 +115,7 @@ function setInnerTimeHTML($timer, langType, charType) {
     if (langType == 'digits') {
         minChar = '분';
         secChar = '초';
-        digitsFont = 'font-family: KaiTi';
+        digitsFont = 'font-family: simsun; font-weight: bold';
     }
 
     else if (langType == 'chinese') {
@@ -124,7 +124,7 @@ function setInnerTimeHTML($timer, langType, charType) {
 
             minChar = '分';
             secChar = '秒';
-            $timer.style.fontFamily = 'KaiTi';
+            $timer.style.fontFamily = 'simkai';
         }
 
         else if (charType == 'pinyin') {
