@@ -4,6 +4,7 @@ body {
     font-family: var(--font-family);
     font-size: min(var(--font-size), calc(100vw / 14), 10vh);
 
+    overflow: hidden; /* hide scrollbars */
     color: var(--base-color);
 }
 
@@ -50,6 +51,11 @@ div {
     height: var(--case-size);
 }
 
+.spacious {
+    /* margin: 500px;border:dashed; */
+    margin-bottom: calc(var(--case-size) / 2);
+}
+
 button {
     border: none;
     padding: 0;
@@ -71,6 +77,6 @@ button:focus    { outline: none; }
 
 #title {
     border-style: var(--case-border-style);
-    width: calc(( var(--case-size) + var(--border-thickness) * 2 ) * 5);
+    width: calc((var(--case-size) + var(--border-thickness)) * 5);
     /* width: calc(( min(var(--case-size-fixed), 9vw) + var(--border-width) * 2 ) * 5); */
 }

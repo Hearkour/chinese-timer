@@ -62,11 +62,18 @@ const TN = { // time numbers
 
 function drawInnerTime($timer, langType, charType) {
 
-    const NOW = Math.floor(performance.now() / 1000);
-    const REMAINS = TIMEOUT - NOW;
+    if (TIMER.isActive) {
+        if (!TIMER.initialTime) TIMER.initialTime = getTimeSeconds();
+        TIMER.now = getTimeSeconds() - TIMER.initialTime;
+    }
+    else {
+        if (TIMER.initialTime) TIMER.interval = getTimeSeconds() - TIMER.stoppedTime;
+    }
+        
+    TIMER.remains = TIMER.timeout - TIMER.now;
 
-    let min = Math.floor(REMAINS / 60);
-    let sec = Math.floor(REMAINS % 60);
+    let min = Math.floor(TIMER.remains / 60);
+    let sec = Math.floor(TIMER.remains % 60);
     setInnerTime($timer, langType, charType, min, sec);
 }
 
@@ -126,7 +133,7 @@ function setInnerTimeHTML($timer, langType, charType) {
             minChar = 'fēn';
             secChar = 'miǎo';
             $timer.style.fontFamily = 'NotoSerif-Medium';
-            $timer.style.fontSize = `${ getComputedStyle(document.body).fontSize.slice(0, -2) / 2 }px`;
+            $timer.style.fontSize = `${ getBodyFontSize() / 2 }px`;
         }
     }
 

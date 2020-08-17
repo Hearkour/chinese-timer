@@ -4,11 +4,14 @@ function $(id)          { return document.getElementById(id); }
 function $s(selector)   { return document.querySelector(selector); }
 function $c(className)  { return document.getElementsByClassName(className)[0]; }
 
-function setRootStyle(property, value, priority) { root.style.setProperty(property, value, priority); }
-function getRootStyle(property) { return root.style.getPropertyValue(property); }
-function getBodyFontSize() { return getComputedStyle(document.body).fontSize.slice(0, -2); }
+function getBodyFontSize()  { return getComputedStyle(document.body).fontSize.slice(0, -2); }
 
-const root = document.documentElement;
+function getTimeSeconds()   { return Math.floor(performance.now() / 1000); }
+
+const html = document.documentElement;
+const body = document.body;
+function setRootStyle(property, value, priority) {        html.style.setProperty(property, value, priority); }
+function getRootStyle(property)                  { return html.style.getPropertyValue(property);             }
 
 const $title = $('title');
 
@@ -16,13 +19,34 @@ const $timer_digits = $('timer-digits');
 const $timer_chinese_chars = $('timer-chinese-chars');
 const $timer_chinese_pinyin = $('timer-chinese-pinyin');
 
-const TIMEOUT = 59 * 60 + 60; // as seconds
+const TIMER = {
+
+    timeout: 59 * 60 + 60, // as seconds
+    isActive: false,
+
+    initialTime: 0, stoppedTime: 0, interval: 0,
+    now: 0,
+    remains: 0,
+
+    reset: () => {
+        TIMER.initialTime = TIMER.stoppedTime = TIMER.interval = 0;
+        TIMER.now = 0;
+        timerUpdate();
+    }
+}
 
 const timer_HTML_gbase = 'class="outer case" style="width: var(--case-size);';
 const baseColor = '140, 120, 210'; // 'R, G, B'
 
-const txtBrightness = '40%';
+const    txtBrightness = '40%';
 function txtSpanDarken(innerHTML) { return `<span style="filter: brightness(${txtBrightness});">${innerHTML}</span>` }
+
+function centerBody(distTop, distBottom) {
+    let propDist = distTop + distBottom;
+    let marginHeight = html.clientHeight - body.clientHeight;
+    // body margin 비례배분
+    body.style = `margin: ${marginHeight*(distTop/propDist)}px 0 ${marginHeight*(distBottom/propDist)}px 0;`;
+}
 
 // Root var values
 const fontSizeBase = '6vmax';
