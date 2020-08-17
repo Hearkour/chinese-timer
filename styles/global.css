@@ -6,6 +6,7 @@ body {
 
     overflow: hidden; /* hide scrollbars */
     color: var(--base-color);
+    margin: var(--body-margin);
 }
 
 body:before {

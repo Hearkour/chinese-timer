@@ -1,15 +1,15 @@
 /*** Initialize everything & first-load globals here ***/
 
+const html = document.documentElement;
+const body = document.body;
+
 function $(id)          { return document.getElementById(id); }
 function $s(selector)   { return document.querySelector(selector); }
 function $c(className)  { return document.getElementsByClassName(className)[0]; }
 
-function getBodyFontSize()  { return getComputedStyle(document.body).fontSize.slice(0, -2); }
+function getBodyFontSize()  { return getComputedStyle(body).fontSize.slice(0, -2); }
 
 function getTimeSeconds()   { return Math.floor(performance.now() / 1000); }
-
-const html = document.documentElement;
-const body = document.body;
 function setRootStyle(property, value, priority) {        html.style.setProperty(property, value, priority); }
 function getRootStyle(property)                  { return html.style.getPropertyValue(property);             }
 
@@ -45,7 +45,7 @@ function centerBody(distTop, distBottom) {
     let propDist = distTop + distBottom;
     let marginHeight = html.clientHeight - body.clientHeight;
     // body margin 비례배분
-    body.style = `margin: ${marginHeight*(distTop/propDist)}px 0 ${marginHeight*(distBottom/propDist)}px 0;`;
+    setRootStyle('--body-margin', `${marginHeight*(distTop/propDist)}px 0 ${marginHeight*(distBottom/propDist)}px 0`);
 }
 
 // Root var values
