@@ -18,3 +18,20 @@
   - fps 조절...?
   > ~~커밋 커밋 커몬~~
 </details>
+
+<details>
+  <summary>Note to self:</summary>
+  
+  ```javascript
+  // Maybe this will be in later use
+  // currently a removed temp func:
+
+  function isActiveClass(className) {
+      let active = false;
+      document.activeElement.classList.forEach(activeClass => {
+          if (activeClass == className) { active = true; return; }
+      });
+      return active;
+  }
+  ```
+</details>

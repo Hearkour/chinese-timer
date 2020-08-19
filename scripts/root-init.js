@@ -19,10 +19,15 @@ const $timer_digits = $('timer-digits');
 const $timer_chinese_chars = $('timer-chinese-chars');
 const $timer_chinese_pinyin = $('timer-chinese-pinyin');
 
+var editing = false;
+
 const TIMER = {
 
+    drawPaused: false, // requestAnimationFrame of timerUpdate is paused
+    isActive: false, // timer is activated
+    // origTime: 0, // time set before user made changes to it
+    
     timeout: 59 * 60 + 60, // as seconds
-    isActive: false,
 
     initialTime: 0, stoppedTime: 0, interval: 0,
     now: 0,
@@ -30,12 +35,25 @@ const TIMER = {
 
     reset: () => {
         TIMER.initialTime = TIMER.stoppedTime = TIMER.interval = 0;
-        TIMER.now = 0;
-        timerUpdate();
+        TIMER.now = TIMER.remains = 0;
     }
 }
 
-const timer_HTML_gbase = 'class="outer case" style="width: var(--case-size);';
+function getEditedTime() {
+    let t = TN.getIds().map(id => id.innerText);
+    let edited = t[0]*6000 + t[1]*600 + t[2]*60 + t[3]*100 + t[4]*10 + t[5]*1;
+    return edited;
+}
+
+function isActiveClass(className) {
+    let active = false;
+    document.activeElement.classList.forEach(activeClass => {
+        if (activeClass == className) { active = true; return; }
+    });
+    return active;
+}
+
+const timer_HTML_gbase = 'class="outer case" style="width: var(--case-size);'; // last " is omitted for a reason :)
 const baseColor = '140, 120, 210'; // 'R, G, B'
 
 const    txtBrightness = '40%';

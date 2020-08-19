@@ -46,13 +46,15 @@ const TN = { // time numbers
     m3:0, m2:0, m1:0,
     s3:0, s2:0, s1:0,
 
+    getIds: function() {
+        return [ $('m3'), $('m2'), $('m1'), $('s3'), $('s2'), $('s1') ];
+    },
+
     convertTo: (charType) => {
-        
         if (charType == 'chars') {
             TN.m3 = C.c(TN.m3); TN.m2 = C.c(TN.m2); TN.m1 = C.c(TN.m1);
             TN.s3 = C.c(TN.s3); TN.s2 = C.c(TN.s2); TN.s1 = C.c(TN.s1);
         }
-
         else if (charType == 'pinyin') {
             TN.m3 = C.p(TN.m3); TN.m2 = C.p(TN.m2); TN.m1 = C.p(TN.m1);
             TN.s3 = C.p(TN.s3); TN.s2 = C.p(TN.s2); TN.s1 = C.p(TN.s1);
@@ -71,6 +73,7 @@ function drawInnerTime($timer, langType, charType) {
     }
         
     TIMER.remains = TIMER.timeout - TIMER.now;
+    if (TIMER.remains < 0) TIMER.remains = 0;
 
     let min = Math.floor(TIMER.remains / 60);
     let sec = Math.floor(TIMER.remains % 60);
@@ -110,12 +113,12 @@ function setInnerTimeChar(langType, min, sec) {
 function setInnerTimeHTML($timer, langType, charType) {
 
     let minChar, secChar;
-    let digitsFont;
+    let digitsFont = '';
     
     if (langType == 'digits') {
         minChar = '분';
         secChar = '초';
-        digitsFont = 'font-family: simsun; font-weight: bold';
+        digitsFont = 'font-family: simsun; font-weight: bold;';
     }
 
     else if (langType == 'chinese') {
@@ -133,21 +136,21 @@ function setInnerTimeHTML($timer, langType, charType) {
             minChar = 'fēn';
             secChar = 'miǎo';
             $timer.style.fontFamily = 'NotoSerif-Medium';
-            $timer.style.fontSize = `${ getBodyFontSize() / 2 }px`;
         }
     }
 
+    let editable = `contenteditable="${editing}"`
     $timer.innerHTML = `
         <div class="outer">
-            <div ${timer_HTML_gbase} border-right: none; ${digitsFont};"> ${txtSpanDarken(TN.m3)}     </div>
-            <div ${timer_HTML_gbase} border-right: none; ${digitsFont};"> ${txtSpanDarken(TN.m2)}     </div>
-            <div ${timer_HTML_gbase} border-right: none; ${digitsFont};"> ${txtSpanDarken(TN.m1)}     </div>
-            <div ${timer_HTML_gbase} border-right: none;">                ${txtSpanDarken(minChar)}   </div>
-            <div ${timer_HTML_gbase} border-right: none;">                                          </div>
-            <div ${timer_HTML_gbase} border-right: none; ${digitsFont};"> ${txtSpanDarken(TN.s3)}     </div>
-            <div ${timer_HTML_gbase} border-right: none; ${digitsFont};"> ${txtSpanDarken(TN.s2)}     </div>
-            <div ${timer_HTML_gbase} border-right: none; ${digitsFont};"> ${txtSpanDarken(TN.s1)}     </div>
-            <div ${timer_HTML_gbase}">                                    ${txtSpanDarken(secChar)}   </div>
+            <div id="m3" ${editable} ${timer_HTML_gbase} border-right: none; ${digitsFont}"> ${txtSpanDarken(TN.m3)}     </div>
+            <div id="m2" ${editable} ${timer_HTML_gbase} border-right: none; ${digitsFont}"> ${txtSpanDarken(TN.m2)}     </div>
+            <div id="m1" ${editable} ${timer_HTML_gbase} border-right: none; ${digitsFont}"> ${txtSpanDarken(TN.m1)}     </div>
+            <div         ${timer_HTML_gbase} border-right: none;">               ${txtSpanDarken(minChar)}   </div>
+            <div         ${timer_HTML_gbase} border-right: none;">                                           </div>
+            <div id="s3" ${editable} ${timer_HTML_gbase} border-right: none; ${digitsFont}"> ${txtSpanDarken(TN.s3)}     </div>
+            <div id="s2" ${editable} ${timer_HTML_gbase} border-right: none; ${digitsFont}"> ${txtSpanDarken(TN.s2)}     </div>
+            <div id="s1" ${editable} ${timer_HTML_gbase} border-right: none; ${digitsFont}"> ${txtSpanDarken(TN.s1)}     </div>
+            <div         ${timer_HTML_gbase}">                                   ${txtSpanDarken(secChar)}   </div>
         </div>
     `;
 }

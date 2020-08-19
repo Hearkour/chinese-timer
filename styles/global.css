@@ -32,6 +32,11 @@ div {
     background-clip: border-box padding-box content-box; /* Firefox 4, Safari 5, Opera 10, IE 9 */
 }
 
+.halffont {
+    /* half of body font size */
+    font-size: calc(min(var(--font-size), calc(100vw / 14), 10vh) / 2);
+}
+
 .outer {
     position: relative;
     top: 0; bottom: 0; left: 0; right: 0;
@@ -55,6 +60,15 @@ div {
 .spacious {
     /* margin: 500px;border:dashed; */
     margin-bottom: calc(var(--case-size) / 2);
+}
+
+.wrapper {
+    /* width: 600px; */
+    /* background: #FFF; */
+    /* padding: 1em; */
+    /* margin: 1em auto; */
+    box-shadow: 0px 12px 20px 1px rgba(80, 35, 139, 0.4);
+    border-radius: 300px;
 }
 
 button {
