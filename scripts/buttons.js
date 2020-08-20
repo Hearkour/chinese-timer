@@ -1,9 +1,9 @@
 /*** Buttons! ***/
 
+const $btn_setTimeout = $('btn-setTimeout');
 const $btn_timer = $('btn-timer');
 const $btn_resetTime = $('btn-resetTime');
 const $btn_border = $('btn-border');
-const $btn_setTimeout = $('btn-setTimeout');
 
 class Button {
 
@@ -54,11 +54,14 @@ $btn_setTimeout.addEventListener('click', function() {
     editing = btnSetTimeout.getState();
     
     if (editing) {
+        setRootStyle('--btn-setTime-alpha', `rgba(${baseColor}, ${btnSetTimeAlpha}`);
         if (TIMER.isActive) $btn_timer.click();
         updateInnerTime();
         TIMER.drawPaused = true;
     }
     else {
+        if (btnBorder.getState() == 1) setRootStyle('--btn-setTime-alpha', `rgba(${baseColor}, 1`);
+        else setRootStyle('--btn-setTime-alpha', `rgba(${baseColor}, ${btnAlpha}`);
         TIMER.timeout = getEditedTime();
         TIMER.reset();
         updateInnerTime();
@@ -88,4 +91,13 @@ $btn_resetTime.addEventListener('click', function() {
 $btn_border.addEventListener('click', function() {
     btnBorder.doclick();
     setRootStyle('--border-alpha', `rgba(${baseColor}, ${btnBorder.getState()})`);
+
+    if (btnBorder.getState() == 1) {
+        setRootStyle('--btn-alpha', `rgba(${baseColor}, 1)`);
+        if (btnSetTimeout.getState() == false) setRootStyle('--btn-setTime-alpha', `rgba(${baseColor}, 1`);
+    }
+    else {
+        setRootStyle('--btn-alpha', `rgba(${baseColor}, ${btnAlpha})`);
+        if (btnSetTimeout.getState() == false) setRootStyle('--btn-setTime-alpha', `rgba(${baseColor}, ${btnAlpha}`);
+    }
 });

@@ -23,6 +23,12 @@ body:before {
     background-size: cover;
 }
 
+#title {
+    border-style: var(--case-border-style);
+    width: calc((var(--case-size) + var(--border-thickness)) * 5);
+    /* width: calc(( min(var(--case-size-fixed), 9vw) + var(--border-width) * 2 ) * 5); */
+}
+
 div {
     border: calc(var(--border-thickness) * 2) var(--border-alpha);
     border-style: var(--border-style) none;
@@ -78,8 +84,8 @@ button {
     width: var(--case-size);
     height: var(--case-size);
     
-    stroke: var(--base-color);
-    fill: var(--base-color);
+    stroke: none;
+    fill: var(--btn-alpha);
     
     filter: brightness(75%);
     cursor: pointer;
@@ -90,8 +96,6 @@ button:hover    { filter: brightness(110%); }
 button:active   { filter: brightness(140%); }
 button:focus    { outline: none; }
 
-#title {
-    border-style: var(--case-border-style);
-    width: calc((var(--case-size) + var(--border-thickness)) * 5);
-    /* width: calc(( min(var(--case-size-fixed), 9vw) + var(--border-width) * 2 ) * 5); */
-}
+#btn-timer,         #btn-resetTime          { fill: var(--btn-setTime-alpha); }
+#btn-timer:hover,   #btn-resetTime:hover    { fill: var(--base-color); }
+#btn-timer:active,  #btn-resetTime:active   { fill: var(--base-color); }

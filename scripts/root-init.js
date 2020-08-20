@@ -53,9 +53,6 @@ function isActiveClass(className) {
     return active;
 }
 
-const timer_HTML_gbase = 'class="outer case" style="width: var(--case-size);'; // last " is omitted for a reason :)
-const baseColor = '140, 120, 210'; // 'R, G, B'
-
 const    txtBrightness = '40%';
 function txtSpanDarken(innerHTML) { return `<span style="filter: brightness(${txtBrightness});">${innerHTML}</span>` }
 
@@ -66,7 +63,13 @@ function centerBody(distTop, distBottom) {
     setRootStyle('--body-margin', `${marginHeight*(distTop/propDist)}px 0 ${marginHeight*(distBottom/propDist)}px 0`);
 }
 
-// Root var values
+const timer_HTML_gbase = 'class="outer case" style="width: var(--case-size);'; // last " is omitted for a reason :)
+const baseColor = '140, 120, 210'; // 'R, G, B'
+const baseAlpha = 1;
+
+var btnSetTimeAlpha = 0.25;
+var btnAlpha = 0.5;
+
 const fontSizeBase = '6vmax';
 var fontSizeMax /* draw.js */;
 const fontFamily = '배달의민족 연성';
@@ -93,8 +96,10 @@ window.addEventListener('load', function() {
     setRootStyle('--case-border-style', case_border_style);
     setRootStyle('--border-style', border_style);
 
-    setRootStyle('--base-color', `rgb(${baseColor})`);
-    setRootStyle('--border-alpha', `rgba(${baseColor}, ${border_alpha})`);
+    setRootStyle('--base-color', `rgba(${baseColor}, ${baseAlpha})`);
+    setRootStyle('--btn-setTime-alpha', `rgba(${baseColor}, 1`);
+    setRootStyle('--btn-alpha', `rgba(${baseColor}, 1)`);
 
+    setRootStyle('--border-alpha', `rgba(${baseColor}, ${border_alpha})`);
     setRootStyle('--border-thickness', border_thickness);
 });
