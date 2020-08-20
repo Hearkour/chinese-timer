@@ -19,26 +19,6 @@ const $timer_digits = $('timer-digits');
 const $timer_chinese_chars = $('timer-chinese-chars');
 const $timer_chinese_pinyin = $('timer-chinese-pinyin');
 
-var editing = false;
-
-const TIMER = {
-
-    drawPaused: false, // requestAnimationFrame of timerUpdate is paused
-    isActive: false, // timer is activated
-    // origTime: 0, // time set before user made changes to it
-    
-    timeout: 59 * 60 + 60, // as seconds
-
-    initialTime: 0, stoppedTime: 0, interval: 0,
-    now: 0,
-    remains: 0,
-
-    reset: () => {
-        TIMER.initialTime = TIMER.stoppedTime = TIMER.interval = 0;
-        TIMER.now = TIMER.remains = 0;
-    }
-}
-
 function getEditedTime() {
     let t = TN.getIds().map(id => id.innerText);
     let edited = t[0]*6000 + t[1]*600 + t[2]*60 + t[3]*100 + t[4]*10 + t[5]*1;
@@ -54,7 +34,7 @@ function isActiveClass(className) {
 }
 
 const    txtBrightness = '40%';
-function txtSpanDarken(innerHTML) { return `<span style="filter: brightness(${txtBrightness});">${innerHTML}</span>` }
+function txtDarkSpan(innerHTML) { return `<span style="filter: brightness(${txtBrightness});">${innerHTML}</span>` }
 
 function centerBody(distTop, distBottom) {
     let propDist = distTop + distBottom;
@@ -63,7 +43,33 @@ function centerBody(distTop, distBottom) {
     setRootStyle('--body-margin', `${marginHeight*(distTop/propDist)}px 0 ${marginHeight*(distBottom/propDist)}px 0`);
 }
 
-const timer_HTML_gbase = 'class="outer case" style="width: var(--case-size);'; // last " is omitted for a reason :)
+const TIMER = {
+
+    class: 'class="outer case"',
+    style: `style="width: var(--case-size); border-right: none; ${digitsFont}"`,
+
+    editing: false, // user is editing timer time
+    drawPaused: false, // requestAnimationFrame of timerUpdate is paused
+    // origTime: 0, // time set before user made changes to it
+    
+    isActive: false, // timer is activated
+    timeout: 59 * 60 + 60, // as seconds
+
+    initialTime: 0, stoppedTime: 0, interval: 0,
+    now: 0,
+    remains: 0,
+
+    getBaseHTML: () => {
+        TIMER.style = `style="width: var(--case-size); border-right: none; ${digitsFont}"`;
+        return TIMER.class + TIMER.style;
+    },
+
+    reset: () => {
+        TIMER.initialTime = TIMER.stoppedTime = TIMER.interval = 0;
+        TIMER.now = TIMER.remains = 0;
+    }
+}
+
 const baseColor = '140, 120, 210'; // 'R, G, B'
 const baseAlpha = 1;
 
@@ -73,6 +79,7 @@ var btnAlpha = 0.5;
 const fontSizeBase = '6vmax';
 var fontSizeMax /* draw.js */;
 const fontFamily = '배달의민족 연성';
+var digitsFont;
 
 const case_font_ratio = 1.5;
 const case_size_max = '9vw';
@@ -89,7 +96,7 @@ window.addEventListener('load', function() {
     
     setRootStyle('--font-family', fontFamily);
     setRootStyle('--font-size', `min(${fontSizeBase}, ${fontSizeMax})`);
-    $title.innerHTML = txtSpanDarken($title.innerHTML);
+    $title.innerHTML = txtDarkSpan($title.innerHTML);
     
     setRootStyle('--case-size-fixed', `${getBodyFontSize() * case_font_ratio}px`);
     setRootStyle('--case-size', `min(${getBodyFontSize() * case_font_ratio}px, ${case_size_max})`);

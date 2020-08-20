@@ -51,9 +51,9 @@ var btnBorder       = new Button($btn_border,     border_alpha,   0,      'none'
 $btn_setTimeout.addEventListener('click', function() {
     btnSetTimeout.doclick();
     
-    editing = btnSetTimeout.getState();
+    TIMER.editing = btnSetTimeout.getState();
     
-    if (editing) {
+    if (TIMER.editing) {
         setRootStyle('--btn-setTime-alpha', `rgba(${baseColor}, ${btnSetTimeAlpha}`);
         if (TIMER.isActive) $btn_timer.click();
         updateInnerTime();

@@ -113,12 +113,15 @@ function setInnerTimeChar(langType, min, sec) {
 function setInnerTimeHTML($timer, langType, charType) {
 
     let minChar, secChar;
-    let digitsFont = '';
+    let editable = '';
+    
+    digitsFont = '';
     
     if (langType == 'digits') {
         minChar = '분';
         secChar = '초';
         digitsFont = 'font-family: simsun; font-weight: bold;';
+        editable = `contenteditable="${TIMER.editing}"`
     }
 
     else if (langType == 'chinese') {
@@ -139,18 +142,18 @@ function setInnerTimeHTML($timer, langType, charType) {
         }
     }
 
-    let editable = `contenteditable="${editing}"`
+    let baseHTML = TIMER.getBaseHTML();
     $timer.innerHTML = `
         <div class="outer">
-            <div id="m3" ${editable} ${timer_HTML_gbase} border-right: none; ${digitsFont}"> ${txtSpanDarken(TN.m3)}     </div>
-            <div id="m2" ${editable} ${timer_HTML_gbase} border-right: none; ${digitsFont}"> ${txtSpanDarken(TN.m2)}     </div>
-            <div id="m1" ${editable} ${timer_HTML_gbase} border-right: none; ${digitsFont}"> ${txtSpanDarken(TN.m1)}     </div>
-            <div         ${timer_HTML_gbase} border-right: none;">               ${txtSpanDarken(minChar)}   </div>
-            <div         ${timer_HTML_gbase} border-right: none;">                                           </div>
-            <div id="s3" ${editable} ${timer_HTML_gbase} border-right: none; ${digitsFont}"> ${txtSpanDarken(TN.s3)}     </div>
-            <div id="s2" ${editable} ${timer_HTML_gbase} border-right: none; ${digitsFont}"> ${txtSpanDarken(TN.s2)}     </div>
-            <div id="s1" ${editable} ${timer_HTML_gbase} border-right: none; ${digitsFont}"> ${txtSpanDarken(TN.s1)}     </div>
-            <div         ${timer_HTML_gbase}">                                   ${txtSpanDarken(secChar)}   </div>
+            <div id="m3"             ${baseHTML}>   ${txtDarkSpan(TN.m3)}   </div>
+            <div id="m2" ${editable} ${baseHTML}>   ${txtDarkSpan(TN.m2)}   </div>
+            <div id="m1" ${editable} ${baseHTML}>   ${txtDarkSpan(TN.m1)}   </div>
+            <div ${baseHTML.split('font')[0]}">     ${txtDarkSpan(minChar)} </div>
+            <div ${baseHTML.split('font')[0]}">                             </div>
+            <div id="s3"             ${baseHTML}>   ${txtDarkSpan(TN.s3)}   </div>
+            <div id="s2" ${editable} ${baseHTML}>   ${txtDarkSpan(TN.s2)}   </div>
+            <div id="s1" ${editable} ${baseHTML}>   ${txtDarkSpan(TN.s1)}   </div>
+            <div ${baseHTML.split('border')[0]}">   ${txtDarkSpan(secChar)} </div>
         </div>
     `;
 }
