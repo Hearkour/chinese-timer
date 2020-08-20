@@ -92,8 +92,8 @@ button {
     background: none;
 }
 
-button:hover    { filter: brightness(110%); }
-button:active   { filter: brightness(140%); }
+button:hover    { filter: brightness(110%); fill: var(--base-color); }
+button:active   { filter: brightness(140%); fill: var(--base-color); }
 button:focus    { outline: none; }
 
 #btn-timer,         #btn-resetTime          { fill: var(--btn-setTime-alpha); }
