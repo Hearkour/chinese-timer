@@ -6,8 +6,6 @@
 	.st0{fill:#675DCE;}
 	.st1{font-family:'NanumSquareRoundR';}
 	.st2{font-size:24px;}
-	.st3{fill:none;stroke:#675DCE;stroke-width:4;stroke-linejoin:bevel;}
 </style>
-<text transform="matrix(1 0 0 1 21.0799 38.5401)" class="st0 st1 st2">선</text>
-<rect x="12" y="12" class="st3" width="40" height="40"/>
+<text transform="matrix(1 0 0 1 21.08 38.5402)" class="st0 st1 st2">색</text>
 </svg>

@@ -90,9 +90,9 @@ function setInnerTimeChar(langType, min, sec) {
     
     if (langType == 'digits') {
         
-        TN.m3 = TN.s3 = '';
-        TN.m2 = min < 10 ? '' : Math.floor(min / 10);
-        TN.s2 = sec < 10 ? '' : Math.floor(sec / 10);
+        TN.m3 = TN.s3 = ' ';
+        TN.m2 = min < 10 ? ' ' : Math.floor(min / 10);
+        TN.s2 = sec < 10 ? ' ' : Math.floor(sec / 10);
         TN.m1 = Math.floor(min % 10);
         TN.s1 = Math.floor(sec % 10);
     }
@@ -115,13 +115,15 @@ function setInnerTimeHTML($timer, langType, charType) {
     let minChar, secChar;
     let editable = '';
     
-    digitsFont = '';
+    digitsFont = editTime = '';
     
     if (langType == 'digits') {
         minChar = '분';
         secChar = '초';
         digitsFont = 'font-family: simsun; font-weight: bold;';
-        editable = `contenteditable="${TIMER.editing}"`
+        
+        editable = `contenteditable="${TIMER.editing}"`;
+        editTime = TIMER.editing ? 'editTime' : '';
     }
 
     else if (langType == 'chinese') {

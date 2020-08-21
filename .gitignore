@@ -1,4 +1,6 @@
 # Ignore these files
 
+dump.js
+
 .vscode/
 vscode-profile-2020-08-13-23-49-08.cpuprofile

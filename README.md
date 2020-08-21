@@ -7,7 +7,7 @@
 ## To-do:
 
 <details>
-  <summary>선택지 만들기:</summary>
+  <summary>선택지 만들기?</summary>
   <br>
   
   - 제한시간설정
@@ -17,21 +17,4 @@
   - 움직이는 배경? 배경색상투명도?
   - fps 조절...?
   > ~~커밋 커밋 커몬~~
-</details>
-
-<details>
-  <summary>Note to self:</summary>
-  
-  ```javascript
-  // Maybe this will be in later use
-  // currently a removed temp func:
-
-  function isActiveClass(className) {
-      let active = false;
-      document.activeElement.classList.forEach(activeClass => {
-          if (activeClass == className) { active = true; return; }
-      });
-      return active;
-  }
-  ```
 </details>

@@ -25,8 +25,7 @@ body:before {
 
 #title {
     border-style: var(--case-border-style);
-    width: calc((var(--case-size) + var(--border-thickness)) * 5);
-    /* width: calc(( min(var(--case-size-fixed), 9vw) + var(--border-width) * 2 ) * 5); */
+    width: calc((var(--case-size) + var(--border-thickness)) * 4);
 }
 
 div {
@@ -43,7 +42,7 @@ div {
     font-size: calc(min(var(--font-size), calc(100vw / 14), 10vh) / 2);
 }
 
-.outer {
+div.outer {
     position: relative;
     top: 0; bottom: 0; left: 0; right: 0;
     
@@ -63,18 +62,18 @@ div {
     height: var(--case-size);
 }
 
-.spacious {
+.marginbottom {
     /* margin: 500px;border:dashed; */
     margin-bottom: calc(var(--case-size) / 2);
 }
 
 .wrapper {
-    /* width: 600px; */
-    /* background: #FFF; */
-    /* padding: 1em; */
-    /* margin: 1em auto; */
-    box-shadow: 0px 12px 20px 1px rgba(80, 35, 139, 0.4);
+    box-shadow: 0px 12px 20px 1px var(--wrapper-alpha);
     border-radius: 300px;
+}
+
+.editTime {
+    color: var(--base-color);
 }
 
 button {
@@ -99,3 +98,37 @@ button:focus    { outline: none; }
 #btn-timer,         #btn-resetTime          { fill: var(--btn-setTime-alpha); }
 #btn-timer:hover,   #btn-resetTime:hover    { fill: var(--base-color); }
 #btn-timer:active,  #btn-resetTime:active   { fill: var(--base-color); }
+
+input#colorpicker {
+    position: absolute;
+    left: calc(var(--case-size) * (-0.375));
+    top: calc(var(--case-size) * (0.25));
+
+    height: calc(var(--case-size) / 5);
+    opacity: 0;
+}
+
+label[for=colorpicker] {
+    position: absolute;
+    left: calc(var(--case-size) * (-0.5));
+    top: calc(var(--case-size) * (-0.5));
+    cursor: pointer;
+}
+
+svg.outer {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+
+    width: var(--case-size);
+    height: var(--case-size);
+}
+
+svg.inner {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    
+    width: var(--case-size);
+    height: var(--case-size);
+}

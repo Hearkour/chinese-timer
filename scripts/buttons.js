@@ -4,21 +4,25 @@ const $btn_setTimeout = $('btn-setTimeout');
 const $btn_timer = $('btn-timer');
 const $btn_resetTime = $('btn-resetTime');
 const $btn_border = $('btn-border');
+const $btn_color = $('btn-color');
+var ispreview = false;
 
 class Button {
 
-    constructor($btnId, toggleOff, toggleOn=toggleOff, icon1=null, icon2=null) {
+    constructor($btnId, description, toggleOff=null, toggleOn=toggleOff, icon1=null, icon2=null) {
         this.$btnId = $btnId;
+        this.description = description;
+
+        this.states = [ toggleOff, toggleOn ];
         this.iconName = [ icon1, icon2 ];
         
         this.i = 0;
-        this.states = [ toggleOff, toggleOn ];
-        this.setIcon();
+        if (toggleOff != 'UNSET') this.setupBtn();
     }
 
     doclick() {
         this.switchState();
-        this.setIcon();
+        this.setupBtn();
         return this.i;
     }
 
@@ -34,19 +38,42 @@ class Button {
         return this.iconName[0] == null ? `${this.$btnId.id}` : `${this.$btnId.id}-${this.iconName[this.i]}`;
     }
 
-    setIcon() {
+    setupBtn() {
         this.$btnId.innerHTML = `
-            <svg style="width: var(--case-size); height: var(--case-size);">
-                <use xlink:href="icons/${this.getIconName()}.svg#레이어_1"></use>
-            </svg>
+            <abbr title='${this.description}'>
+                <svg style="width: var(--case-size); height: var(--case-size);">
+                    <use xlink:href="icons/${this.getIconName()}.svg#레이어_1"></use>
+                </svg>
+            </abbr>
         `;
     }
 };
 
-var btnSetTimeout   = new Button($btn_setTimeout, false,          true,   'edit',  'resume' );
-var btnTimer        = new Button($btn_timer,      TIMER.isActive, true,   'start', 'stop'   );
-var btnResetTime    = new Button($btn_resetTime,  TIMER.timeout                             );
-var btnBorder       = new Button($btn_border,     border_alpha,   0,      'none',  'solid'  );
+var btnSetTimeout   = new Button($btn_setTimeout, '시간 설정',            false,          true,   'edit',  'resume' );
+var btnTimer        = new Button($btn_timer,      '타이머 시작/일시 정지', TIMER.isActive, true,   'start', 'stop'   );
+var btnResetTime    = new Button($btn_resetTime,  '타이머 초기화',         TIMER.timeout                             );
+var btnBorder       = new Button($btn_border,     '윤곽선 숨기기/보이기',  border_alpha,   0,      'none',  'solid'  );
+var btnColor        = new Button($btn_color,      '색 선택',              'UNSET'                                   );
+
+btnColor.setupBtn = () => {
+    btnColor.$btnId.innerHTML = `
+        <abbr title='${btnColor.description}'>
+            <div style="position: relative; display:inline-block;">
+                <input id="colorpicker" type="color" value="${ColorToHex(getRootStyle('--base-color'))}">
+                <label for="colorpicker">
+                    <svg id="cpOuter" class="outer">
+                        <use xlink:href="icons/btn-color-outer.svg#레이어_1"></use>
+                    </svg>
+                    <svg id="cpInner" class="inner">
+                        <use xlink:href="icons/btn-color-inner.svg#레이어_1"></use>
+                    </svg>
+                </label>
+            </div>
+        </abbr>
+    `;
+}
+
+btnColor.setupBtn();
 
 $btn_setTimeout.addEventListener('click', function() {
     btnSetTimeout.doclick();
@@ -101,3 +128,25 @@ $btn_border.addEventListener('click', function() {
         if (btnSetTimeout.getState() == false) setRootStyle('--btn-setTime-alpha', `rgba(${baseColor}, ${btnAlpha}`);
     }
 });
+
+$btn_color.addEventListener('click', function() {
+    ispreview = true;
+    previewColor();
+});
+
+$('colorpicker').addEventListener('change', function() {
+    ispreview = false;
+    setNewColor(HexToDecimals($('colorpicker').value));
+});
+
+function previewColor() {
+    $('cpOuter').style.fill = $('colorpicker').value;
+    $('cpInner').style.fill = $('colorpicker').value;
+    $('cpInner').style.filter = `brightness(${txtBrightness})`;
+
+    if (ispreview) requestAnimationFrame(previewColor);
+    else {
+        $('cpOuter').removeAttribute('style');
+        $('cpInner').removeAttribute('style');
+    }
+}

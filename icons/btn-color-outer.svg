@@ -4,10 +4,10 @@
 	 y="0px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#675DCE;}
-	.st1{font-family:'NanumSquareRoundR';}
-	.st2{font-size:24px;}
-	.st3{fill:none;stroke:#675DCE;stroke-width:4;stroke-linejoin:bevel;}
 </style>
-<text transform="matrix(1 0 0 1 21.0799 38.5401)" class="st0 st1 st2">선</text>
-<rect x="12" y="12" class="st3" width="40" height="40"/>
+<g>
+	<g>
+		<path class="st0" d="M52.2,9.6H11.8l-2.2,2.2v40.3l2.2,2.2h40.3l2.2-2.2V11.8L52.2,9.6z M14.4,49.6V14.4h35.2v35.2H14.4z"/>
+	</g>
+</g>
 </svg>
