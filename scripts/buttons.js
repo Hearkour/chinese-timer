@@ -141,6 +141,7 @@ $('colorpicker').addEventListener('change', function() {
 
 function previewColor() {
     $('cpOuter').style.fill = $('colorpicker').value;
+    $('cpOuter').style.filter = `brightness(100%)`;
     $('cpInner').style.fill = $('colorpicker').value;
     $('cpInner').style.filter = `brightness(${txtBrightness})`;
 
