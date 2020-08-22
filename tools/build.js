@@ -56,7 +56,9 @@ let minifySvg = function(source, files, dest) {
         fs.readFile(source + '/' + file, 'utf8', function(err, data) {
             if (err) error(err);
             svgo.optimize(data, {path: source}).then(function(result) {
-                if (!result.data.contains('id')) result.data = result.data.split(' ').splice(2, 0, 'id="레이어_1"').toString();
+                if (!result.data.includes('id')) {
+                    result.data = result.data.split(' '); result.data.splice(2, 0, 'id="레이어_1"'); result.data = result.data.join(' ');
+                }
                 fs.writeFile(dest + '/' + file, result.data, (err) => { if (err) error(err); });
             });
         });
