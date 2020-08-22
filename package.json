@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Hearkour/chinese-timer/issues"
   },
-  "homepage": "https://github.com/Hearkour/chinese-timer#readme"
+  "homepage": "https://github.com/Hearkour/chinese-timer#readme",
+  "devDependencies": {
+    "uglify-js": "^3.10.1"
+  }
 }

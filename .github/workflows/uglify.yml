@@ -19,7 +19,6 @@ jobs:
       - name: Build uglify
         run: |
           npm ci
-          npm install uglify-js -g
           uglifyjs scripts/root-init.js scripts/draw.js scripts/printtime.js scripts/buttons.js \
                    -o chinese-timer.min.js -c -m --mangle-props \
                    --source-map "root='https://raw.githubusercontent.com/Hearkour/chinese-timer/master/scripts'"
