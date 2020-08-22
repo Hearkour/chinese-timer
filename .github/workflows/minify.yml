@@ -1,4 +1,5 @@
 name: Minimizing CI
+
 on:
   push:
     branches: [ master ]
@@ -32,7 +33,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -m "CI: Automated min build push" -a
+          git commit -m "CI: Automated min build push" -a | exit 0
 
       - name: Push changes
         uses: ad-m/github-push-action@master
