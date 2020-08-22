@@ -1,5 +1,6 @@
 /* Removed unused fonts */
 
 @font-face { font-family: '배달의민족 연성'; src: url('../fonts/other/BMYEONSUNG.otf') format('opentype'), url('../fonts/other/BMYEONSUNG.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'simsun'; src: url('../fonts/other/simsun.ttc'); }
 @font-face { font-family: 'simkai'; src: url('../fonts/other/simkai.ttf'); }
 @font-face { font-family: 'NotoSerif-Medium'; src: url('../fonts/NotoSerif/KR/NotoSerifKR-Medium.otf'); }
