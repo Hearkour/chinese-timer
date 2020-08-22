@@ -4,7 +4,6 @@ dump.js
 dump.css
 dump.html
 
-webpack.config.js
 node_modules
 
 .vscode/
