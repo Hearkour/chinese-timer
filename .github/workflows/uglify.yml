@@ -1,0 +1,24 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Uglify CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build uglify
+        run: |
+          npm ci
+          npm install uglify-js -g
+          uglifyjs scripts/root-init.js scripts/draw.js scripts/printtime.js scripts/buttons.js \
+                   -o chinese-timer.min.js -c -m --mangle-props \
+                   --source-map "root='https://raw.githubusercontent.com/Hearkour/chinese-timer/master/scripts'"
+          npm run build
