@@ -1,6 +1,6 @@
 # [chinese-timer](https://hearkour.github.io/chinese-timer/)
 
-###### I have finally automated my min files, I am s t r o n g
+###### I have finally automated updating my min files, I am s t r o n g
 
 중국어 수업 시간에 사용할 수 있을(?) 중국어 타이머.
 
