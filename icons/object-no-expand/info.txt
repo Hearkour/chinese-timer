@@ -1,4 +1,0 @@
-Icon svgs before Object >> Expand x2
-(files for backup)
-
-Object >> Expanded icons are added with stroke of 1px (0.75pt) (default stroke width of CSS)
