@@ -1,7 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Uglify CI
-
 on:
   push:
     branches: [ master ]
@@ -10,6 +7,10 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest ]
+    name: ${{ matrix.os }}
     runs-on: ubuntu-latest
 
     steps:
