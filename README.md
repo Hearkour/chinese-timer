@@ -1,13 +1,13 @@
 # [chinese-timer](https://hearkour.github.io/chinese-timer/)
 
-### WIP ; Currently a prototype!
+###### I have finally automated my min files, I am s t r o n g
 
 중국어 수업 시간에 사용할 수 있을(?) 중국어 타이머.
 
-## To-do:
+#### To-do:
 
 <details>
-  <summary>선택지 만들기?</summary>
+  <summary>add these?</summary>
   <br>
   
   - 제한시간설정
