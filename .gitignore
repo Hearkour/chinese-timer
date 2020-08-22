@@ -1,8 +1,8 @@
 # Ignore these files
+unused/
 
-dump.js
-dump.css
-dump.html
+chinese-timer.min.css
+chinese-timer.min.js
 
 node_modules
 

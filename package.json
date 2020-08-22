@@ -2,7 +2,7 @@
   "name": "chinese-timer",
   "version": "1.0.0",
   "description": "중국어 수업 시간에 사용할 수 있는 중국어 타이머",
-
+  
   "scripts": {
     "test": "echo \"open chinese-timer/package.json\" && exit 1",
     "build": "webpack"
@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/Hearkour/chinese-timer#readme",
   "devDependencies": {
-    "uglify-js": "^3.10.1"
+    "csso-cli": "^3.0.0",
+    "terser": "^5.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   }
 }
