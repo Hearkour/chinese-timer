@@ -1,0 +1,19 @@
+{
+  "name": "chinese-timer",
+  "version": "1.0.0",
+  "description": "중국어 수업 시간에 사용할 수 있는 중국어 타이머",
+  "main": "dump.js",
+  "scripts": {
+    "test": "echo \"open chinese-timer/package.json\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hearkour/chinese-timer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hearkour/chinese-timer/issues"
+  },
+  "homepage": "https://github.com/Hearkour/chinese-timer#readme"
+}
