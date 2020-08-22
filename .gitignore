@@ -1,9 +1,6 @@
 # Ignore these files
 unused/
 
-chinese-timer.min.css
-chinese-timer.min.js
-
 node_modules
 
 .vscode/
