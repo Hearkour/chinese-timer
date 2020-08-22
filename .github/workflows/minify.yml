@@ -2,8 +2,6 @@ name: Minimizing CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
@@ -15,29 +13,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Git repo checkout
+      - name: Git checkout repo
         uses: actions/checkout@v2
+
+      # https://github.com/marketplace/actions/github-push
+      - name: Git checkout master
+        uses: actions/checkout@master
+        with:
+          persist-credentials: false
+          fetch-depth: 0
 
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
       
-      - name: npm install, build
+      - name: Create minimized files
         run: |
           npm ci
           npm run build
 
       - name: Commit files
         run: |
-          echo ${{ github.ref }}
-          git add .
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -m "CI: Automated build push" -a | exit 0
+          git commit -m "CI: Automated min build push" -a
 
       - name: Push changes
-        if: github.ref == 'refs/heads/master'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
