@@ -1,4 +1,4 @@
-name: Uglify CI
+name: Minimizing CI
 on:
   push:
     branches: [ master ]
@@ -16,16 +16,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
+      # - name: Use Node.js
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: '12.x'
       
-      - name: Build uglify
+      - name: Build minimizing dependencies
         run: |
           npm ci
           npm run build
-          # uglifyjs -v
-          # uglifyjs scripts/root-init.js scripts/draw.js scripts/printtime.js scripts/buttons.js \
-          #          -o chinese-timer.min.js -c -m --mangle-props \
-          #          --source-map "root='https://raw.githubusercontent.com/Hearkour/chinese-timer/master/scripts'"
+          terser -V
+          csso -v
+
+      # uglifyjs -v
+      # uglifyjs scripts/root-init.js scripts/draw.js scripts/printtime.js scripts/buttons.js \
+      #          -o chinese-timer.min.js -c -m --mangle-props \
+      #          --source-map "root='https://raw.githubusercontent.com/Hearkour/chinese-timer/master/scripts'"
