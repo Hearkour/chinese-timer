@@ -25,7 +25,7 @@ jobs:
       
       - name: npm install, build
         run: |
-          npm install
+          npm ci
           npm run build
 
       - name: Commit files
@@ -34,7 +34,7 @@ jobs:
           git add .
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -m "CI: Automated build push" -a | exit 0
+          git commit -m "CI: Automated build push"
 
       - name: Push changes
         if: github.ref == 'refs/heads/master'
