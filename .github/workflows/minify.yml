@@ -25,9 +25,9 @@ jobs:
         run: |
           npm install --save-dev terser
           npm ci
-          npm run build
           terser -V
           csso -v
+          npm run build
 
       # uglifyjs -v
       # uglifyjs scripts/root-init.js scripts/draw.js scripts/printtime.js scripts/buttons.js \
