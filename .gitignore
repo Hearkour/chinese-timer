@@ -1,9 +1,9 @@
 # Ignore these files
 unused/
-icons/object-no-expand/
-
-node_modules
 
 fonts/full/
+icons/full/object-no-expand/
+
+node_modules
 .vscode/
 vscode-profile-2020-08-13-23-49-08.cpuprofile

@@ -42,7 +42,7 @@ class Button {
         this.$btnId.innerHTML = `
             <abbr title='${this.description}'>
                 <svg style="width: var(--case-size); height: var(--case-size);">
-                    <use xlink:href="icons/${this.getIconName()}.svg#레이어_1"></use>
+                    <use xlink:href="icons/min/${this.getIconName()}.svg#레이어_1"></use>
                 </svg>
             </abbr>
         `;
@@ -62,10 +62,10 @@ btnColor.setupBtn = () => {
                 <input id="colorpicker" type="color" value="${ColorToHex(getRootStyle('--base-color'))}">
                 <label for="colorpicker">
                     <svg id="cpOuter" class="outer">
-                        <use xlink:href="icons/btn-color-outer.svg#레이어_1"></use>
+                        <use xlink:href="icons/min/btn-color-outer.svg#레이어_1"></use>
                     </svg>
                     <svg id="cpInner" class="inner">
-                        <use xlink:href="icons/btn-color-inner.svg#레이어_1"></use>
+                        <use xlink:href="icons/min/btn-color-inner.svg#레이어_1"></use>
                     </svg>
                 </label>
             </div>

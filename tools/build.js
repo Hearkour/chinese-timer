@@ -1,11 +1,12 @@
 const fs = require('fs');
 const terser = require('terser');
 const csso = require('csso');
+const SVGO = require('svgo');
 
 // Create min.js via terser.minify
 // terser: https://github.com/terser/terser
 
-var options = {
+let options = {
     compress: {},
     mangle: { toplevel: true }
 };
@@ -32,3 +33,43 @@ fs.writeFile('styles/chinese-timer.min.css', (
 ), (err) => {
     if (err) error(err);
 });
+
+// Create minified svgs via svgo.optimize
+// SVGO: https://github.com/svg/svgo
+
+let svgo = new SVGO({
+    plugins: [
+        {cleanupAttrs: true}, {removeDoctype: true}, {removeXMLProcInst: true}, {removeComments: true},
+        {removeMetadata: true}, {removeTitle: true}, {removeDesc: true}, {removeUselessDefs: true},
+        {removeEditorsNSData: true}, {removeEmptyAttrs: true}, {removeHiddenElems: true}, {removeEmptyText: true},
+        {removeEmptyContainers: true}, {removeViewBox: false}, {cleanupEnableBackground: true}, {convertStyleToAttrs: true},
+        {convertColors: true}, {convertPathData: true}, {convertTransform: true}, {removeUnknownsAndDefaults: true},
+        {removeNonInheritableGroupAttrs: true}, {removeUselessStrokeAndFill: true}, {removeUnusedNS: true}, {cleanupIDs: true},
+        {cleanupNumericValues: true}, {moveElemsAttrsToGroup: true}, {moveGroupAttrsToElems: true}, {collapseGroups: true},
+        {removeRasterImages: false}, {mergePaths: true}, {convertShapeToPath: true}, {sortAttrs: true},
+        {removeDimensions: true}, {removeAttrs: {attrs: '(stroke|fill)'}}
+    ]
+});
+
+let minifySvg = function(source, files, dest) {
+    files.forEach(file => {
+        fs.readFile(source + '/' + file, 'utf8', function(err, data) {
+            if (err) error(err);
+            svgo.optimize(data, {path: source}).then(function(result) {
+                fs.writeFile(dest + '/' + file, result.data, (err) => { if (err) error(err); });
+            });
+        });
+    });
+}
+
+minifySvg('icons/full', [
+    'btn-setTimeout-edit.svg',
+    'btn-setTimeout-resume.svg',
+    'btn-timer-start.svg',
+    'btn-timer-stop.svg',
+    'btn-resetTime.svg',
+    'btn-border-none.svg',
+    'btn-border-solid.svg',
+    'btn-color-inner.svg',
+    'btn-color-outer.svg',
+], 'icons/min');
