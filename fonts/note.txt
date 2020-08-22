@@ -1,2 +1,0 @@
-Unnessesary fonts will be removed on final publication.
-Current fonts are being tested for cross-compliance

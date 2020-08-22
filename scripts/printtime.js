@@ -132,7 +132,7 @@ function setInnerTimeHTML($timer, langType, charType) {
 
             minChar = '分';
             secChar = '秒';
-            $timer.style.fontFamily = 'simkai';
+            $timer.style.fontFamily = 'kaiti';
         }
 
         else if (charType == 'pinyin') {
