@@ -1,4 +1,4 @@
-# [chinese-timer](https://hearkour.github.io/chinese-timer/)
+# [chinese-timer](https://nebobyeoli.github.io/chinese-timer/)
 
 ###### I have finally automated updating my min files, I am s t r o n g
 
