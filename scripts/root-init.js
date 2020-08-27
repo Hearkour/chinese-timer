@@ -34,7 +34,7 @@ const $timer_digits = $('timer-digits');
 const $timer_chinese_chars = $('timer-chinese-chars');
 const $timer_chinese_pinyin = $('timer-chinese-pinyin');
 
-var baseColor = '140, 120, 210'; // 'R, G, B'
+var baseColor = '180, 0, 60'; // 'R, G, B'
 var wrapperAlpha = 0.2;
 
 var btnSetTimeAlpha = 0.25;
