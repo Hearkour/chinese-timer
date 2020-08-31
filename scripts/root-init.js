@@ -47,11 +47,13 @@ const $timer_chinese_pinyin = $('timer-chinese-pinyin');
 
 const $div_selectTimeout = $('div-selectTimeout');
 $div_selectTimeout.innerHTML = `
-    <select id="select-setTimeout">
-        <option value="60"          >   1분 </option>
-        <option value="180"         >   3분 </option>
-        <option value="300" selected>   5분 </option>
-    </select>
+    <abbr title='시간 선택'>
+        <select id="select-setTimeout">
+            <option value="60"          >   1분 </option>
+            <option value="180"         >   3분 </option>
+            <option value="300" selected>   5분 </option>
+        </select>
+    </abbr>
 `;
 const $select_setTimeout = $('select-setTimeout');
 
