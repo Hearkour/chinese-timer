@@ -75,6 +75,6 @@ minifySvg('icons/full', [
     'btn-border-solid.svg',
     'btn-color-inner.svg',
     'btn-color-outer.svg',
-    'btn-wrapper-nowrap',
-    'btn-wrapper-wrap',
+    'btn-wrapper-nowrap.svg',
+    'btn-wrapper-wrap.svg',
 ], 'icons/min');
