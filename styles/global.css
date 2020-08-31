@@ -24,8 +24,10 @@ body:before {
 }
 
 #title {
-    border-style: var(--case-border-style);
-    width: calc((var(--case-size) + var(--border-thickness)) * 4);
+    font-size: var(--font-size-title);
+    height: var(--case-size-title);
+    /* font-size: calc(var(--font-size) * 1.6); */
+    /* height: calc(var(--case-size) + var(--font-size) * 0.6); */
 }
 
 div {
@@ -76,6 +78,11 @@ div.outer {
     color: var(--base-color);
 }
 
+#btnsdiv {
+    border: none;
+    height: calc(var(--case-size) / 2);
+}
+
 button {
     border: none;
     padding: 0;
@@ -115,20 +122,13 @@ label[for=colorpicker] {
     cursor: pointer;
 }
 
-svg.outer {
-    position: absolute;
-    left: 1px;
-    top: 1px;
-
-    width: var(--case-size);
-    height: var(--case-size);
+svg {
+    width: var(--btn-size);
+    height: var(--btn-size);
 }
 
-svg.inner {
+svg.outer, svg.inner {
     position: absolute;
-    left: 1px;
-    top: 1px;
-    
-    width: var(--case-size);
-    height: var(--case-size);
+    left: calc((var(--case-size) - var(--btn-size)) / 2);
+    top: calc((var(--case-size) - var(--btn-size)) / 2);
 }

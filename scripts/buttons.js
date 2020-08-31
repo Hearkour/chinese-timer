@@ -5,6 +5,7 @@ const $btn_timer = $('btn-timer');
 const $btn_resetTime = $('btn-resetTime');
 const $btn_border = $('btn-border');
 const $btn_color = $('btn-color');
+const $btn_wrapper = $('btn-wrapper');
 var ispreview = false;
 
 class Button {
@@ -41,7 +42,7 @@ class Button {
     setupBtn() {
         this.$btnId.innerHTML = `
             <abbr title='${this.description}'>
-                <svg style="width: var(--case-size); height: var(--case-size);">
+                <svg>
                     <use xlink:href="icons/min/${this.getIconName()}.svg#레이어_1"></use>
                 </svg>
             </abbr>
@@ -54,11 +55,12 @@ var btnTimer        = new Button($btn_timer,      '타이머 시작/일시 정�
 var btnResetTime    = new Button($btn_resetTime,  '타이머 초기화',         TIMER.timeout                             );
 var btnBorder       = new Button($btn_border,     '윤곽선 숨기기/보이기',  border_alpha,   0,      'none',  'solid'  );
 var btnColor        = new Button($btn_color,      '색 선택',              'UNSET'                                   );
+var btnWrapper      = new Button($btn_wrapper,    '모서리 모양',          dwrp, !dwrp,    dwrp?'nowrap':'wrap',  dwrp?'wrap':'nowrap' );
 
 btnColor.setupBtn = () => {
     btnColor.$btnId.innerHTML = `
         <abbr title='${btnColor.description}'>
-            <div style="position: relative; display:inline-block;">
+            <div style="position: relative; display: inline-block;">
                 <input id="colorpicker" type="color" value="${ColorToHex(getRootStyle('--base-color'))}">
                 <label for="colorpicker">
                     <svg id="cpOuter" class="outer">
@@ -151,3 +153,9 @@ function previewColor() {
         $('cpInner').removeAttribute('style');
     }
 }
+
+$btn_wrapper.addEventListener('click', function() {
+    btnWrapper.doclick();
+    console.log(btnWrapper.getState());
+    displayWrapper(wrapperIds, btnWrapper.getState());
+})

@@ -28,17 +28,32 @@ function ColorToHex(rgbStr) {
     return hexStr;
 }
 
+function setWrapperIds(wrapperIds) {
+    for (const elem of document.getElementsByClassName('wrapper')) {
+        wrapperIds.push(elem.id);
+    }
+}
+
+function displayWrapper(wrapperIds, wrapbool) {
+    if (wrapbool == false) wrapperIds.forEach(id => { $(id).classList.remove('wrapper'); });
+    else wrapperIds.forEach(id => { if (!$(id).classList.contains('wrapper')) $(id).classList.add('wrapper'); });
+}
+
 const $title = $('title');
 
 const $timer_digits = $('timer-digits');
 const $timer_chinese_chars = $('timer-chinese-chars');
 const $timer_chinese_pinyin = $('timer-chinese-pinyin');
 
-var baseColor = '180, 0, 60'; // 'R, G, B'
+const dwrp = true; // default wrapper display
+const wrapperIds = [];
+
 var wrapperAlpha = 0.2;
+var baseColor = '180, 0, 60'; // 'R, G, B'
 
 var btnSetTimeAlpha = 0.25;
 var btnAlpha = 0.5;
+var btnSize = 'calc(var(--case-size) / 1.4)';
 
 const txtBrightness = 0.4;
 const txtEditBrightness = 1.1;
@@ -50,6 +65,7 @@ const fontFamily = '배달의민족 연성';
 var digitsFont;
 var editTime;
 
+const title_font_ratio = 1.25;
 const case_font_ratio = 1.5;
 const case_size_max = '9vw';
 
@@ -121,6 +137,34 @@ function centerBody(distTop, distBottom) {
     setRootStyle('--body-margin', `${marginHeight*(distTop/propDist)}px ${border_thickness} ${marginHeight*(distBottom/propDist)}px ${border_thickness}`);
 }
 
+function getCSScompResult(cssCompStr) {
+
+    let cssCompArr = cssCompStr.split(/[(), ]+/);
+    let m = undefined;
+    let t;
+    const width = html.clientWidth;
+    const height = html.clientHeight;
+
+    cssCompArr.forEach(x => {
+        if (x != 'min' && x != 'max' && x != '') {
+            switch (x.slice(-2)) {
+                case 'px': t = parseInt(x.slice(0, -2)); break;
+                case 'vw': t = parseInt(x.slice(0, -2)) / 100 * width; break;
+                case 'vh': t = parseInt(x.slice(0, -2)) / 100 * height; break;
+                case 'vmin': t = parseInt(x.slice(0, -4)) / 100 * (width < height ? width : height); break;
+                case 'vmax': t = parseInt(x.slice(0, -4)) / 100 * (width > height ? width : height); break;
+                default: break;
+            }
+
+            if (m == undefined) m = t;
+            else if (cssCompArr[0] == 'min' && m > t) m = t;
+            else if (cssCompArr[0] == 'max' && m < t) m = t;
+        }
+    });
+
+    return m;
+}
+
 const TIMER = {
 
     class: `class="outer case ${editTime}"`,
@@ -150,14 +194,22 @@ const TIMER = {
 }
 
 // Init once
+
+setWrapperIds(wrapperIds);
+displayWrapper(wrapperIds, dwrp);
+
 setRootStyle('--font-family',        fontFamily);
 setRootStyle('--font-size',         `min(${fontSizeBase}, ${fontSizeMax})`);
 $title.innerHTML = txtDarkSpan($title.innerHTML);
 
 setRootStyle('--case-size-fixed',   `${getBodyFontSize() * case_font_ratio}px`);
 setRootStyle('--case-size',         `min(${getBodyFontSize() * case_font_ratio}px, ${case_size_max})`);
+setRootStyle('--btn-size',           btnSize);
 setRootStyle('--case-border-style',  case_border_style);
 setRootStyle('--border-style',       border_style);
 
 setNewColor(baseColor, true);
 setRootStyle('--border-thickness',   border_thickness);
+
+setRootStyle('--font-size-title',   `${getBodyFontSize() * title_font_ratio}px`);
+setRootStyle('--case-size-title',   `${getCSScompResult(getRootStyle('--case-size')) + getBodyFontSize() * (title_font_ratio - 1)}px`);

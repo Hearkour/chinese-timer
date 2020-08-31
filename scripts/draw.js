@@ -23,7 +23,7 @@ function update(timerFPS) {
 // the animation loop calculates time elapsed since the last loop
 // and only draws if your specified fps interval is achieved
 function timerUpdate() {
-    
+
     FT.now = performance.now();
     FT.elapsed = FT.now - FT.then;
 
@@ -51,7 +51,7 @@ function updateInnerTime() {
 }
 
 function responsiveUpdate() {
-    
+
     if (window.innerWidth > 1400)       fontSizeMax = '4.5rem';
     else if (window.innerWidth > 1080)  fontSizeMax = '3.5rem';
     else if (window.innerWidth > 840)   fontSizeMax = '3rem';
@@ -62,14 +62,17 @@ function responsiveUpdate() {
 }
 
 function realTimeUpdate() {
-    
+
     // ** Update frame : real time **
     responsiveUpdate();
     centerBody(1, 1.618);
-    
+
     setRootStyle('--font-size', `min(${fontSizeBase}, ${fontSizeMax})`);
     setRootStyle('--case-size', `min(${getBodyFontSize() * case_font_ratio}px, ${case_size_max})`);
     setRootStyle('--border-thickness', border_thickness);
+
+    setRootStyle('--font-size-title',   `${getBodyFontSize() * title_font_ratio}px`);
+    setRootStyle('--case-size-title',   `${getCSScompResult(getRootStyle('--case-size')) + getBodyFontSize() * (title_font_ratio - 1)}px`);
 
     // request next frame
     requestAnimationFrame(realTimeUpdate);
