@@ -175,7 +175,7 @@ const TIMER = {
     // origTime: 0, // time set before user made changes to it
     
     isActive: false, // timer is activated
-    timeout: 5 * 60 + 0, // as seconds
+    timeout: 1 * 60 + 0, // as seconds
 
     initialTime: 0, stoppedTime: 0, interval: 0,
     now: 0,
