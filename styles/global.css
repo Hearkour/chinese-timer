@@ -98,13 +98,45 @@ button {
     background: none;
 }
 
-button:hover    { filter: brightness(110%); fill: var(--base-color); }
-button:active   { filter: brightness(140%); fill: var(--base-color); }
+button:hover    { filter: brightness(110%); }
+button:active   { filter: brightness(140%); }
 button:focus    { outline: none; }
 
 #btn-timer,         #btn-resetTime          { fill: var(--btn-setTime-alpha); }
 #btn-timer:hover,   #btn-resetTime:hover    { fill: var(--base-color); }
 #btn-timer:active,  #btn-resetTime:active   { fill: var(--base-color); }
+
+#div-selectTimeout {
+    width: calc(var(--case-size) * 1.6);
+    height: var(--case-size);
+
+    border: none;
+    padding: 0;
+    background: none;
+}
+
+select {
+    width: calc(var(--btn-size) * 1.6);
+    height: calc(var(--btn-size) * 0.725);
+
+    border: calc(var(--border-thickness) * 0.75 + 1px) var(--border-style) var(--btn-alpha);
+    border-radius: calc(var(--btn-size) / 10);
+    color: var(--btn-alpha);
+    filter: hue-rotate(0.5rad);
+
+    font-size: calc(var(--btn-size) / 2.5);
+    font-family: 'NanumSquareRoundB';
+
+    position: relative;
+    left: 2px;
+    top: 2px;
+    padding-left: 4px;
+
+    outline: none;
+    cursor: pointer;
+}
+
+select:hover    { filter: brightness(110%); }
 
 input#colorpicker {
     position: absolute;

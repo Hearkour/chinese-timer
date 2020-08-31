@@ -45,7 +45,17 @@ const $timer_digits = $('timer-digits');
 const $timer_chinese_chars = $('timer-chinese-chars');
 const $timer_chinese_pinyin = $('timer-chinese-pinyin');
 
-const dwrp = true; // default wrapper display
+const $div_selectTimeout = $('div-selectTimeout');
+$div_selectTimeout.innerHTML = `
+    <select id="select-setTimeout">
+        <option value="60"          >   1분 </option>
+        <option value="180"         >   3분 </option>
+        <option value="300" selected>   5분 </option>
+    </select>
+`;
+const $select_setTimeout = $('select-setTimeout');
+
+const dwrp = false; // default wrapper display
 const wrapperIds = [];
 
 var wrapperAlpha = 0.2;
@@ -175,7 +185,7 @@ const TIMER = {
     // origTime: 0, // time set before user made changes to it
     
     isActive: false, // timer is activated
-    timeout: 1 * 60 + 0, // as seconds
+    timeout: 5 * 60 + 0, // as seconds
 
     initialTime: 0, stoppedTime: 0, interval: 0,
     now: 0,

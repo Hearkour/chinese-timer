@@ -73,7 +73,7 @@ btnColor.setupBtn = () => {
             </div>
         </abbr>
     `;
-}
+};
 
 btnColor.setupBtn();
 
@@ -158,4 +158,12 @@ $btn_wrapper.addEventListener('click', function() {
     btnWrapper.doclick();
     console.log(btnWrapper.getState());
     displayWrapper(wrapperIds, btnWrapper.getState());
-})
+});
+
+$select_setTimeout.addEventListener('change', function() {
+    if (TIMER.isActive) $btn_timer.click();
+    TIMER.timeout = parseInt($select_setTimeout.value);
+    TIMER.reset();
+    // console.log($selectTime.value);
+    // console.log(typeof($selectTime.value));
+});

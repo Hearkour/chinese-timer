@@ -52,10 +52,16 @@ function updateInnerTime() {
 
 function responsiveUpdate() {
 
-    if (window.innerWidth > 1400)       fontSizeMax = '4.5rem';
-    else if (window.innerWidth > 1080)  fontSizeMax = '3.5rem';
-    else if (window.innerWidth > 840)   fontSizeMax = '3rem';
-    else                                fontSizeMax = '2.4rem';
+    if (window.innerWidth > 1400) {
+        if      (window.innerHeight < 420)  fontSizeMax = '1.5rem';
+        else if (window.innerHeight < 640)  fontSizeMax = '2.5rem';
+        else if (window.innerHeight < 780)  fontSizeMax = '3.5rem';
+        else                                fontSizeMax = '4.5rem';
+    }
+
+    else if (window.innerWidth > 1080) fontSizeMax = '3.5rem';
+    else if (window.innerWidth > 840) fontSizeMax = '3rem';
+    else fontSizeMax = '2.4rem';
 
     if (window.innerWidth > 840 && window.innerHeight > 540) border_thickness = '5px';
     else border_thickness = '3px';
