@@ -212,7 +212,7 @@ const TIMER = {
 const SOUND = {
     index: {
         clock: 0,
-        timeout: 2
+        timeout: 1
     },
     clock: [
         new Audio('fx/sounds/clock0.flac'),
