@@ -3,6 +3,7 @@ unused/
 
 fonts/full/
 icons/full/object-no-expand/
+fx/sounds/longclocks
 
 node_modules
 .vscode/

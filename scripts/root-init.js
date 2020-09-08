@@ -190,7 +190,10 @@ const TIMER = {
     timeout: 5 * 60 + 0, // as seconds
 
     initialTime: 0, stoppedTime: 0, interval: 0,
-    now: 0,
+    now: 0, then: 0,
+
+    // remaining time
+    // also indicates whether the timer has struck zero
     remains: 0,
 
     getBaseHTML: () => {
@@ -201,9 +204,27 @@ const TIMER = {
 
     reset: () => {
         TIMER.initialTime = TIMER.stoppedTime = TIMER.interval = 0;
-        TIMER.now = TIMER.remains = 0;
+        TIMER.now = 0;
+        TIMER.remains = TIMER.timeout;
     }
-}
+};
+
+const SOUND = {
+    index: {
+        clock: 0,
+        timeout: 2
+    },
+    clock: [
+        new Audio('fx/sounds/clock0.flac'),
+        new Audio('fx/sounds/clock1.flac'),
+        new Audio('fx/sounds/clock2.flac')
+    ],
+    timeout: [
+        new Audio('fx/sounds/timeout0.flac'),
+        new Audio('fx/sounds/timeout1.flac'),
+        new Audio('fx/sounds/timeout2.flac')
+    ]
+};
 
 // Init once
 

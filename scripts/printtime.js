@@ -67,13 +67,28 @@ function drawInnerTime($timer, langType, charType) {
     if (TIMER.isActive) {
         if (!TIMER.initialTime) TIMER.initialTime = getTimeSeconds();
         TIMER.now = getTimeSeconds() - TIMER.initialTime;
+
+        // If 1 second has passed since TIMER.then
+        if (TIMER.then != TIMER.now && TIMER.remains > 0) {
+            TIMER.then = TIMER.now;
+            SOUND.clock[SOUND.index.clock].play();
+        }
     }
+
     else {
         if (TIMER.initialTime) TIMER.interval = getTimeSeconds() - TIMER.stoppedTime;
     }
-        
+
     TIMER.remains = TIMER.timeout - TIMER.now;
-    if (TIMER.remains < 0) TIMER.remains = 0;
+
+    if (TIMER.remains < 1) {
+        TIMER.then = TIMER.remains = 0;
+        
+        if (TIMER.isActive) {
+            SOUND.timeout[SOUND.index.timeout].play();
+            $btn_timer.click();
+        }
+    }
 
     let min = Math.floor(TIMER.remains / 60);
     let sec = Math.floor(TIMER.remains % 60);

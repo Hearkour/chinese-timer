@@ -95,16 +95,23 @@ $btn_setTimeout.addEventListener('click', function() {
         TIMER.reset();
         updateInnerTime();
     }
+
+    if (TIMER.remains < 1) TIMER.remains = TIMER.timeout;
 });
 
 $btn_timer.addEventListener('click', function() {
-    btnTimer.doclick();
-    
-    TIMER.isActive = btnTimer.getState();
+
+    if (TIMER.editing) TIMER.remains = getEditedTime();
+
+    if (TIMER.remains > 0 || TIMER.isActive) {
+        btnTimer.doclick();
+        TIMER.isActive = btnTimer.getState();
+    }
+
     if (!TIMER.isActive) {
-        
         TIMER.stoppedTime = getTimeSeconds();
     }
+
     else {
         if (btnSetTimeout.getState() == true) $btn_setTimeout.click();
         TIMER.initialTime += TIMER.interval;
@@ -161,9 +168,9 @@ $btn_wrapper.addEventListener('click', function() {
 });
 
 $select_setTimeout.addEventListener('change', function() {
+    if (btnSetTimeout.getState() == true) $btn_setTimeout.click();
     if (TIMER.isActive) $btn_timer.click();
     TIMER.timeout = parseInt($select_setTimeout.value);
     TIMER.reset();
-    // console.log($selectTime.value);
-    // console.log(typeof($selectTime.value));
+    updateInnerTime();
 });
