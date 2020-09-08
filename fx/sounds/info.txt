@@ -1,2 +1,2 @@
 Sound fx from https://freesound.org/
-Only necessary parts extracted for performance.
+For performance, only necessary parts are extracted

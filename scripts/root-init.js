@@ -215,14 +215,14 @@ const SOUND = {
         timeout: 1
     },
     clock: [
-        new Audio('fx/sounds/clock0.flac'),
-        new Audio('fx/sounds/clock1.flac'),
-        new Audio('fx/sounds/clock2.flac')
+        new Audio('fx/sounds/clock0.mp3'),
+        new Audio('fx/sounds/clock1.mp3'),
+        new Audio('fx/sounds/clock2.mp3')
     ],
     timeout: [
-        new Audio('fx/sounds/timeout0.flac'),
-        new Audio('fx/sounds/timeout1.flac'),
-        new Audio('fx/sounds/timeout2.flac')
+        new Audio('fx/sounds/timeout0.mp3'),
+        new Audio('fx/sounds/timeout1.mp3'),
+        new Audio('fx/sounds/timeout2.mp3')
     ]
 };
 
